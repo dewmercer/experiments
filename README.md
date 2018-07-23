@@ -1,1 +1,3 @@
-# experiments
+# Experiments
+
+Personal experiments.  Mostly garbage.
