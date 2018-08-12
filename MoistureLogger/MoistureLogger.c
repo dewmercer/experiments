@@ -27,7 +27,7 @@
 #define DATA_FILE "/home/pi/moisture.log"
 
 #define TIME_FORMAT "%F %T"
-#define LOG_FORMAT 
+#define LOG_FORMAT ", %.3f"
 
 #define TIME_BUFFER_SIZE 256
 
@@ -72,8 +72,8 @@ int main(int argc, char *argv[]) {
         
     for (int i = 0;i < CHANNELS; i++) {
       int raw = analogRead(pinbase + i);
-      printf(", %.3f", (float)raw / DIVISOR * 5.0);
-      fprintf(file, ", %.3f", (float)raw / DIVISOR * 5.0);
+      printf(LOG_FORMAT, (float)raw / DIVISOR * 5.0);
+      fprintf(file, LOG_FORMAT, (float)raw / DIVISOR * 5.0);
     }
     printf("\n");
     fprintf(file, "\n");
