@@ -5,4 +5,4 @@ set(CMAKE_C_STANDARD 11)
 
 add_executable(MoistureLogger
         MoistureLogger.c)
-target_link_libraries(MoistureLogger wiringPi)
+target_link_libraries(MoistureLogger wiringPi m)
