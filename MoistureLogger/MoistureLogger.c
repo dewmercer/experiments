@@ -38,39 +38,39 @@ int (*setup_ptr)(const int, const int) = &mcp3004Setup;
 const float DIVISOR = (float) pow(2, RESOLUTION);
 
 int percent5(int raw) {
-    return (int)round(((float)raw / DIVISOR) * 100.0);
+  return (int)round(((float)raw / DIVISOR) * 100.0);
 }
 
 int capacitive(int raw) {
-    return 100 - percent5(raw);
+  return 100 - percent5(raw);
 }
 
 float range3(int raw) {
-    return ((float)raw / DIVISOR) * (5.0/3.0);
+  return ((float)raw / DIVISOR) * (5.0/3.0);
 }
 int percent3(int raw) {
-    return (int)round(range3(raw) * 100.0);
+  return (int)round(range3(raw) * 100.0);
 }
 
 const float tempRange = 80.0 - -40.0;
 
 int temp(int raw) {
-    return (int)round((-40.0 + tempRange * range3(raw)) * 9/5 + 32);
+  return (int)round((-40.0 + tempRange * range3(raw)) * 9/5 + 32);
 }
 
 int zero(int raw) {
-    return 0;
+  return 0;
 }
 
 int (*convert[8]) (int raw) = {
-    &capacitive,
-    &percent3,
-    &percent3,
-    &temp,
-    &temp,
-    &percent5,
-    &zero,
-    &zero
+  &capacitive,
+  &percent3,
+  &percent3,
+  &temp,
+  &temp,
+  &percent5,
+  &zero,
+  &zero
 };
 
 
