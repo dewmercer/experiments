@@ -48,6 +48,7 @@ int capacitive(int raw) {
 float range3(int raw) {
   return ((float)raw / DIVISOR) * (5.0/3.0);
 }
+
 int percent3(int raw) {
   return (int)round(range3(raw) * 100.0);
 }
