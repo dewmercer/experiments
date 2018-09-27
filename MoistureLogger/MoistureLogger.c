@@ -1,12 +1,13 @@
 ﻿#include <wiringPi.h>
 #include <pcf8591.h>
 #include <mcp3004.h>
+#include "tlv2556ipwr.h"
 #include <time.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MCP3008
+#define TLV2556IPWR
 
 #if defined(PCF8591)
 #define RESOLUTION 8
@@ -21,6 +22,13 @@ int (*setup_ptr)(const int, const int) = &pcf8591Setup;
 #define CHANNELS 8
 
 int (*setup_ptr)(const int, const int) = &mcp3004Setup;
+
+#elif defined(TLV2556IPWR)
+#define RESOLUTION 8
+#define SELECTOR 0
+#define CHANNELS 0x0E
+
+int (*setup_ptr)(const int, const int) = &tlv2556ipwrSetup;
 
 #else
 #error "No supported ADC is defined"
@@ -113,9 +121,8 @@ int main(int argc, char *argv[]) {
     FILE *file = fopen(DATA_FILE, "a");
     printf("%s", timeBuffer);
     fprintf(file, "%s", timeBuffer);
-
-    for (int i = 0; i < CHANNELS; i++) {
-      int val = convert[i](analogRead(PIN_BASE + i));
+    for (int i = 0; i < CHANNELS-1; i++) {
+      int val = analogRead(PIN_BASE + i);
       printf(LOG_FORMAT, val);
       fprintf(file, LOG_FORMAT, val);
     }
