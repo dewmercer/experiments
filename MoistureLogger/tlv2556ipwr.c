@@ -12,11 +12,11 @@ static int myAnalogRead (struct wiringPiNodeStruct *node, int pin)
   unsigned char spiData;
   unsigned char chanBits ;
   int chan = pin - node->pinBase ;
-  
+
   chanBits = (chan << 4) | 0b0100;
   spiData = chanBits;
   wiringPiSPIDataRW (node->fd, &spiData, 1) ;
-  
+
   // Have to read twice because first read after config is garbage
   spiData = chanBits;
   wiringPiSPIDataRW (node->fd, &spiData, 1) ;
@@ -39,8 +39,8 @@ int tlv2556ipwrSetup (const int pinBase, int spiChannel)
   if (wiringPiSPISetup (spiChannel, 1000000) < 0)
     return FALSE ;
 
-  // Note:  While the ty255674 only hs 11 channels channels 
-  // Channels 0x0B thru 0x0E are used for onboard self test 
+  // Note:  While the ty255674 only hs 11 channels channels
+  // Channels 0x0B thru 0x0E are used for onboard self test
   // and 0x0F is used to access Config register 2
   node = wiringPiNewNode (pinBase, 0x0F) ;
 
