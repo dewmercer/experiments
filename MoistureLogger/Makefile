@@ -150,6 +150,33 @@ MoistureLogger.c.s:
 	$(MAKE) -f CMakeFiles/MoistureLogger.dir/build.make CMakeFiles/MoistureLogger.dir/MoistureLogger.c.s
 .PHONY : MoistureLogger.c.s
 
+tlv2556ipwr.o: tlv2556ipwr.c.o
+
+.PHONY : tlv2556ipwr.o
+
+# target to build an object file
+tlv2556ipwr.c.o:
+	$(MAKE) -f CMakeFiles/MoistureLogger.dir/build.make CMakeFiles/MoistureLogger.dir/tlv2556ipwr.c.o
+.PHONY : tlv2556ipwr.c.o
+
+tlv2556ipwr.i: tlv2556ipwr.c.i
+
+.PHONY : tlv2556ipwr.i
+
+# target to preprocess a source file
+tlv2556ipwr.c.i:
+	$(MAKE) -f CMakeFiles/MoistureLogger.dir/build.make CMakeFiles/MoistureLogger.dir/tlv2556ipwr.c.i
+.PHONY : tlv2556ipwr.c.i
+
+tlv2556ipwr.s: tlv2556ipwr.c.s
+
+.PHONY : tlv2556ipwr.s
+
+# target to generate assembly for a file
+tlv2556ipwr.c.s:
+	$(MAKE) -f CMakeFiles/MoistureLogger.dir/build.make CMakeFiles/MoistureLogger.dir/tlv2556ipwr.c.s
+.PHONY : tlv2556ipwr.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -162,6 +189,9 @@ help:
 	@echo "... MoistureLogger.o"
 	@echo "... MoistureLogger.i"
 	@echo "... MoistureLogger.s"
+	@echo "... tlv2556ipwr.o"
+	@echo "... tlv2556ipwr.i"
+	@echo "... tlv2556ipwr.s"
 .PHONY : help
 
 

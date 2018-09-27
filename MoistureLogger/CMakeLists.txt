@@ -4,5 +4,6 @@ project(MoistureLogger C)
 set(CMAKE_C_STANDARD 11)
 
 add_executable(MoistureLogger
-        MoistureLogger.c)
+        MoistureLogger.c
+        tlv2556ipwr.c)
 target_link_libraries(MoistureLogger wiringPi m)
