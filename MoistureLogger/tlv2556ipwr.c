@@ -1,9 +1,6 @@
 #include <wiringPi.h>
 #include <wiringPiSPI.h>
 
-#include <stdio.h>
-#include <stdlib.h>
-
 /*
  * myAnalogRead:
  *	Return the analog value of the given pin
@@ -14,7 +11,7 @@ static int myAnalogRead (struct wiringPiNodeStruct *node, int pin)
 {
   unsigned char spiData;
   unsigned char chanBits ;
-  uint chan = pin - node->pinBase ;
+  int chan = pin - node->pinBase ;
   
   chanBits = (chan << 4) | 0b0100;
   spiData = chanBits;
