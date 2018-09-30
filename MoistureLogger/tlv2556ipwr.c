@@ -36,7 +36,7 @@ int tlv2556ipwrSetup (const int pinBase, int spiChannel)
 {
   struct wiringPiNodeStruct *node ;
 
-  if (wiringPiSPISetup (spiChannel, 1000000) < 0)
+  if (wiringPiSPISetup (spiChannel, 9600) < 0)
     return FALSE ;
 
   // Note:  While the ty255674 only hs 11 channels channels

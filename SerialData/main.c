@@ -39,15 +39,15 @@ int main ()
     return err;
   }
   
-  int fd = wiringPiSPISetup(0, 1);
+  int fd = wiringPiSPISetup(1, 9600);
   printf("SPI File Descriptor: %d\n", fd);
   
   unsigned char counter = 0; 
   
   while(TRUE){
     unsigned char data = counter;
-    wiringPiSPIDataRW(0, &data, 1);
-    delay(25);
+    wiringPiSPIDataRW(1, &data, 1);
+    delay(1000);
     counter++;
   }
   printf ("\n") ;
