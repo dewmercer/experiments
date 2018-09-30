@@ -33,7 +33,6 @@
 
 int main ()
 {
-  
   int err = wiringPiSetup();
   if (err != 0) {
     printf("ERROR setting up wiringPi: %X\n", err);
@@ -45,19 +44,28 @@ int main ()
   #define ADC_SPI_CHANNEL 0
   #define SR_SPI_CHANNEL 1
 
+  #define DEFAULT_THRESHOLD 255
   #define CHANNEL_0_THRESHOLD 100
   #define CHANNEL_1_THRESHOLD 200
 
-  #define CHANNEL_0_ON_MASK 0b00000001
-  #define CHANNEL_1_ON_MASK 0b00000010
+  #define NUM_SOLENOIDS 8
 
-  #define CHANNEL_0_OFF_MASK 0b11111110
-  #define CHANNEL_1_OFF_MASK 0b11111101
+  unsigned char thresholds[NUM_SOLENOIDS] = {
+    CHANNEL_0_THRESHOLD, 
+    CHANNEL_1_THRESHOLD,
+    DEFAULT_THRESHOLD,
+    DEFAULT_THRESHOLD,
+    DEFAULT_THRESHOLD,
+    DEFAULT_THRESHOLD,
+    DEFAULT_THRESHOLD,
+    DEFAULT_THRESHOLD};
+
+  unsigned char solenoidOnMasks[NUM_SOLENOIDS];
   
-  unsigned char thresholds[2] = {CHANNEL_0_THRESHOLD, CHANNEL_1_THRESHOLD};
-  
-  unsigned char onMasks[2] = {CHANNEL_0_ON_MASK, CHANNEL_1_ON_MASK};
-  unsigned char offMasks[2] = {CHANNEL_0_OFF_MASK, CHANNEL_1_OFF_MASK};
+  for (int i = 0; i< NUM_SOLENOIDS;i++){
+    solenoidOnMasks[i] = 1 << i;
+    //solenoidOffMasks[i] = solenoidOnMasks[i] ^ 0xFF;
+  }
   
   int adcFd = tlv2556ipwrSetup (ADC_PINBASE, ADC_SPI_CHANNEL);
 
@@ -77,15 +85,16 @@ int main ()
       printf("pin %d value %d\n", i, val);
       
       if (val < thresholds[i] &&
-          (srCurrentData & onMasks[i]) > 0) {
-
-        srCurrentData &= offMasks[i];
+          (srCurrentData & solenoidOnMasks[i]) > 0) {
+            printf("turning off: %d\n", i);
+        srCurrentData ^= solenoidOnMasks[i];
         srData = srCurrentData;
         wiringPiSPIDataRW(SR_SPI_CHANNEL, &srData, 1);
       } else if (val >= thresholds[i] &&
-          (srCurrentData & onMasks[i]) == 0){
+          (srCurrentData & solenoidOnMasks[i]) == 0){
+            printf("turning on: %d\n", i);
     
-        srCurrentData |= onMasks[i];
+        srCurrentData ^= solenoidOnMasks[i];
         srData = srCurrentData;    
         wiringPiSPIDataRW(SR_SPI_CHANNEL, &srData, 1);
       }
