@@ -1,5 +1,7 @@
 #include <wiringPi.h>
 #include <wiringPiSPI.h>
+#include "tlv2556ipwr.h"
+#include <stdio.h>
 
 /*
  * myAnalogRead:
@@ -17,35 +19,34 @@ static int myAnalogRead (struct wiringPiNodeStruct *node, int pin)
   spiData = chanBits;
   wiringPiSPIDataRW (node->fd, &spiData, 1) ;
 
-  // Have to read twice because first read after config is garbage
-  spiData = chanBits;
-  wiringPiSPIDataRW (node->fd, &spiData, 1) ;
-
   return spiData;
 }
 
 
 /*
- * ty255674TSetup:
+ * tlv2556ipwrSetup:
  *	Create a new wiringPi device node for an mcp3004 on the Pi's
  *	SPI interface.
  *********************************************************************************
  */
 
-int tlv2556ipwrSetup (const int pinBase, int spiChannel)
+int tlv2556ipwrSetup (const int pinBase, int spiChannel, int speed)
 {
   struct wiringPiNodeStruct *node ;
 
-  if (wiringPiSPISetup (spiChannel, 9600) < 0)
+  if (wiringPiSPISetup (spiChannel, speed) < 0)
     return FALSE ;
-
-  // Note:  While the ty255674 only hs 11 channels channels
-  // Channels 0x0B thru 0x0E are used for onboard self test
-  // and 0x0F is used to access Config register 2
-  node = wiringPiNewNode (pinBase, 0x0F) ;
+    
+  node = wiringPiNewNode (pinBase, TLV2556IPWR_NUM_CHANNELS) ;
 
   node->fd         = spiChannel ;
   node->analogRead = myAnalogRead ;
 
+  // Read the current data from each channel to clear garbage
+  // Dont read the last one though as it sets up the last config register
+  for (int i = 0; i < TLV2556IPWR_NUM_INPUT_LINES; i++) {
+      analogRead(pinBase + i);
+  }
+  
   return TRUE ;
 }
