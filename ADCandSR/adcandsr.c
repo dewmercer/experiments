@@ -49,13 +49,11 @@ int main ()
   int srFd  = wiringPiSPISetup(SR_SPI_CHANNEL, BUS_SPEED);  
   printf("SR File Descriptor: %d\n", srFd);
   
-  
   unsigned char srCurrentData = 0;
   unsigned char srData = srCurrentData;
-  wiringPiSPIDataRW(SR_SPI_CHANNEL, &srData, 1);
   
   while(TRUE){
-    for (int i = 0; i < TLV2556IPWR_NUM_INPUT_LINES; i++) {
+    for (int i = 0; i < NUM_SOLENOIDS; i++) {
       int val = analogRead(ADC_PINBASE + i);
       printf("pin %d value %d\n", i, val);
       
