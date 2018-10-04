@@ -1,52 +1,34 @@
-#include <wiringPi.h>
-#include <wiringPiSPI.h>
 #include "tlv2556ipwr.h"
 #include <stdio.h>
-
-/*
- * myAnalogRead:
- *	Return the analog value of the given pin
- *********************************************************************************
- */
-
-static int myAnalogRead (struct wiringPiNodeStruct *node, int pin)
-{
-  unsigned char spiData;
-  unsigned char chanBits ;
-  int chan = pin - node->pinBase ;
-
-  chanBits = (chan << 4) | 0b0100;
-  spiData = chanBits;
-  wiringPiSPIDataRW (node->fd, &spiData, 1) ;
-
-  return spiData;
-}
-
+#include <string.h>
+#include <stdio.h>
+#include "SPI.h"
 
 /*
  * tlv2556ipwrSetup:
- *	Create a new wiringPi device node for an mcp3004 on the Pi's
- *	SPI interface.
- *********************************************************************************
  */
-
-int tlv2556ipwrSetup (const int pinBase, int spiChannel, int speed)
+int TLV2556IPWRSetup (int spiChannel, int speed)
 {
-  struct wiringPiNodeStruct *node ;
-
-  if (wiringPiSPISetup (spiChannel, speed) < 0)
-    return FALSE ;
-    
-  node = wiringPiNewNode (pinBase, TLV2556IPWR_NUM_CHANNELS) ;
-
-  node->fd         = spiChannel ;
-  node->analogRead = myAnalogRead ;
-
-  // Read the current data from each channel to clear garbage
-  // Dont read the last one though as it sets up the last config register
-  for (int i = 0; i < TLV2556IPWR_NUM_INPUT_LINES; i++) {
-      analogRead(pinBase + i);
+  int ret = 0;
+  if ((ret = SpiOpen(spiChannel, speed)) > 0){
+    unsigned char initCfgR2 = 0b11111110; 
+    ret = SpiWrite(spiChannel, &initCfgR2, 1);
   }
+  return ret;
+}
+
+int TLV2556IPWRReadMany (int spiChannel, unsigned char *pins, unsigned char *rxData, int len)
+{
+  unsigned char tmpPins[len + 1];
+  unsigned char tmpResults[len + 1];
   
-  return TRUE ;
+  tmpPins[len] = tmpPins[0];
+  for (int i =0; i<len;i++){
+    tmpPins[i] = (pins[i] << 4) | 0b00000100;
+  }
+  tmpPins[len] = 0b00000100;
+  
+  int ret = SpiReadWrite(spiChannel, tmpPins, tmpResults, len + 1);
+  memcpy(rxData, &tmpResults[1], len + sizeof(unsigned char));
+  return ret;
 }

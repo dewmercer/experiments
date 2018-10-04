@@ -8,7 +8,12 @@ extern "C" {
   #define TLV2556IPWR_NUM_CHANNELS 0x0F
   #define TLV2556IPWR_NUM_INPUT_LINES 11
   
-  int tlv2556ipwrSetup(int pinBase, int spiChannel, int speed);
+  
+int TLV2556IPWRSetup (int spiChannel, int speed);
+
+int TLV2556IPWRRead (int spiChannel, unsigned char pin, unsigned char *rxData);
+
+int TLV2556IPWRReadMany (int spiChannel, unsigned char *pins, unsigned char *rxData, int len);
 
 #ifdef __cplusplus
 }
