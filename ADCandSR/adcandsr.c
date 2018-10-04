@@ -3,31 +3,10 @@
 #include <errno.h>
 #include "errors.h"
 #include "tlv2556ipwr.h"
+#include "utils.h"
 
-#include <time.h>
-
-  
-#define ADC_PINBASE 64
-#define BUS_SPEED 100000
 #define ADC_SPI_CHANNEL 0
-#define SR_SPI_CHANNEL 1
-
-#define DEFAULT_THRESHOLD 255
-#define CHANNEL_0_THRESHOLD 100
-#define CHANNEL_1_THRESHOLD 200
-
-#define NUM_SOLENOIDS 8
-
-
-void delay (unsigned int howLong)
-{
-  struct timespec sleeper, dummy ;
-
-  sleeper.tv_sec  = (time_t)(howLong / 1000) ;
-  sleeper.tv_nsec = (long)(howLong % 1000) * 1000000 ;
-
-  nanosleep (&sleeper, &dummy) ;
-}
+#define BUS_SPEED 100000
 
 int main ()
 {
@@ -37,20 +16,16 @@ int main ()
     return adcFd;
   }
 
-  delay(100);
-  int pinCount = 11;
-  unsigned char pins[pinCount];
-  unsigned char results[pinCount];
+  int pins[TLV2556IPWR_NUM_INPUT_LINES];
+  unsigned char results[TLV2556IPWR_NUM_INPUT_LINES];
   
-  printf("sizeof(pins) = %d\n", sizeof(pins));
-  
-  for (unsigned char i = 0;i<pinCount;i++){
+  for (int i = 0;i<TLV2556IPWR_NUM_INPUT_LINES;i++){
     pins[i] = i;
   }
   
-  TLV2556IPWRReadMany(0, pins, results, sizeof(pins));
+  TLV2556IPWRReadPins(0, pins, results, TLV2556IPWR_NUM_INPUT_LINES);
   
-  for (int i = 0;i<pinCount;i++){
+  for (int i = 0;i<TLV2556IPWR_NUM_INPUT_LINES;i++){
     printf("pin %d => %d\n", i, results[i]);
   }
   return 0 ;

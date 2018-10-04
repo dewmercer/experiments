@@ -87,15 +87,6 @@ int SpiReadWrite(int channel, unsigned char *txData, unsigned char *rxData, int 
     printf("SPI ioctl error. ioctl returned %d: %s\n", ret, strerror (errno));
     ret = SPI_IOCTL_ERROR;
   }
-
-/**  
-  printf("SPI: DataLen = %d\n", dataLen);
-  if(spi.rx_buf != (unsigned long)NULL) {
-    for (int i = 0;i<dataLen;i++) {
-      printf("%d", rxData[i]);
-    }
-  }
-  */
   return ret;
 }
 
@@ -111,13 +102,11 @@ int SpiWriteByte (int channel, unsigned char txData)
 
 int SpiRead (int channel, unsigned char *rxData, int rxDataLen)
 {
-  printf("SPIRead\n");
   return SpiReadWrite(channel, NULL, rxData, rxDataLen);
 }
 
 int SpiReadByte (int channel, unsigned char *rxData)
 {
-  printf("SPIReadByte\n");
   return SpiRead(channel, rxData, 1);
 }
 
