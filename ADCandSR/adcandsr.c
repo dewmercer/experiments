@@ -4,6 +4,7 @@
 #include "errors.h"
 #include "tlv2556ipwr.h"
 #include "utils.h"
+#include "time.h"
 
 #define ADC_SPI_CHANNEL 0
 #define BUS_SPEED 100000
@@ -18,15 +19,19 @@ int main ()
 
   int pins[TLV2556IPWR_NUM_INPUT_LINES];
   unsigned char results[TLV2556IPWR_NUM_INPUT_LINES];
-  
+
   for (int i = 0;i<TLV2556IPWR_NUM_INPUT_LINES;i++){
     pins[i] = i;
   }
-  
+
+while(1){
   TLV2556IPWRReadPins(0, pins, results, TLV2556IPWR_NUM_INPUT_LINES);
-  
+
+
   for (int i = 0;i<TLV2556IPWR_NUM_INPUT_LINES;i++){
     printf("pin %d => %d\n", i, results[i]);
   }
+  sleep(1000);
+}
   return 0 ;
 }

@@ -123,32 +123,32 @@ MoistureLogger/fast:
 	$(MAKE) -f CMakeFiles/MoistureLogger.dir/build.make CMakeFiles/MoistureLogger.dir/build
 .PHONY : MoistureLogger/fast
 
-MoistureLogger.o: MoistureLogger.c.o
+main.o: main.c.o
 
-.PHONY : MoistureLogger.o
+.PHONY : main.o
 
 # target to build an object file
-MoistureLogger.c.o:
-	$(MAKE) -f CMakeFiles/MoistureLogger.dir/build.make CMakeFiles/MoistureLogger.dir/MoistureLogger.c.o
-.PHONY : MoistureLogger.c.o
+main.c.o:
+	$(MAKE) -f CMakeFiles/MoistureLogger.dir/build.make CMakeFiles/MoistureLogger.dir/main.c.o
+.PHONY : main.c.o
 
-MoistureLogger.i: MoistureLogger.c.i
+main.i: main.c.i
 
-.PHONY : MoistureLogger.i
+.PHONY : main.i
 
 # target to preprocess a source file
-MoistureLogger.c.i:
-	$(MAKE) -f CMakeFiles/MoistureLogger.dir/build.make CMakeFiles/MoistureLogger.dir/MoistureLogger.c.i
-.PHONY : MoistureLogger.c.i
+main.c.i:
+	$(MAKE) -f CMakeFiles/MoistureLogger.dir/build.make CMakeFiles/MoistureLogger.dir/main.c.i
+.PHONY : main.c.i
 
-MoistureLogger.s: MoistureLogger.c.s
+main.s: main.c.s
 
-.PHONY : MoistureLogger.s
+.PHONY : main.s
 
 # target to generate assembly for a file
-MoistureLogger.c.s:
-	$(MAKE) -f CMakeFiles/MoistureLogger.dir/build.make CMakeFiles/MoistureLogger.dir/MoistureLogger.c.s
-.PHONY : MoistureLogger.c.s
+main.c.s:
+	$(MAKE) -f CMakeFiles/MoistureLogger.dir/build.make CMakeFiles/MoistureLogger.dir/main.c.s
+.PHONY : main.c.s
 
 tlv2556ipwr.o: tlv2556ipwr.c.o
 
@@ -186,9 +186,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... MoistureLogger"
-	@echo "... MoistureLogger.o"
-	@echo "... MoistureLogger.i"
-	@echo "... MoistureLogger.s"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
 	@echo "... tlv2556ipwr.o"
 	@echo "... tlv2556ipwr.i"
 	@echo "... tlv2556ipwr.s"
