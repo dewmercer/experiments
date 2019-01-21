@@ -7,23 +7,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define TLV2556IPWR
+#define TLV2556IPWR 1
 
-#if defined(PCF8591)
+#ifdef PCF8591
 #define RESOLUTION 8
 #define SELECTOR 0x48
 #define CHANNELS 4
 
 int (*setup_ptr)(const int, const int) = &pcf8591Setup;
 
-#elif defined(MCP3008)
+#elif MCP3008
 #define RESOLUTION 10
 #define SELECTOR 0
 #define CHANNELS 8
 
 int (*setup_ptr)(const int, const int) = &mcp3004Setup;
 
-#elif defined(TLV2556IPWR)
+#elif TLV2556IPWR
 #define RESOLUTION 8
 #define SELECTOR 0
 #define CHANNELS 0x0E
@@ -31,7 +31,8 @@ int (*setup_ptr)(const int, const int) = &mcp3004Setup;
 int (*setup_ptr)(const int, const int) = &tlv2556ipwrSetup;
 
 #else
-#error "No supported ADC is defined"
+
+//#error "No supported ADC is defined"
 #endif
 
 #define PIN_BASE 64
