@@ -35,7 +35,7 @@ func NewSNx4HC590(
 		}
 	}
 
-	if err := gpio.ReserveComponentPins(countClock, registerClock, clear, countEnable, outputEnable); err != nil {
+	if err := gpio.ReserveControlPins(countClock, registerClock, clear, countEnable, outputEnable); err != nil {
 		return nil, err
 	}
 

@@ -9,7 +9,21 @@ const (
 	numPhysicalPins = 40
 )
 
-var pinReservationMutex = sync.Mutex{}
+var powerPins = map[int]bool{
+	1:true,
+	2:true,
+	6:true,
+	9:true,
+	14:true,
+	17:true,
+	20:true,
+	25:true,
+	30:true,
+	34:true,
+	39:true,
+}
+
+var PinReservationMutex = sync.Mutex{}
 
 var reservations = map[int]bool{}
 
@@ -24,11 +38,22 @@ func IsReserved(pin int) bool {
 }
 
 func Reserve(pin int) error {
+	PinReservationMutex.Lock()
+	defer PinReservationMutex.Unlock()
+	return UnsynchronizedReserve(pin)
+}
+
+func UnsynchronizedReserve(pin int) error{
+	if pin == 27 || pin == 28{
+		return fmt.Errorf("pin %d may not be used", pin)
+	}
+
+	if _, ok := powerPins[pin];ok{
+		return fmt.Errorf("pin %d is a power pin", pin)
+	}
+
 	if pin > 0 {
 		if _, ok := reservations[pin-1]; ok {
-			pinReservationMutex.Lock()
-			defer pinReservationMutex.Unlock()
-
 			if IsReserved(pin) {
 				return fmt.Errorf("physical pin %d is already reserved", pin)
 			}
@@ -40,10 +65,14 @@ func Reserve(pin int) error {
 }
 
 func Release(pin int) {
+	PinReservationMutex.Lock()
+	defer PinReservationMutex.Unlock()
+	UnsynchronizedRelease(pin)
+}
+
+func UnsynchronizedRelease(pin int){
 	if pin > 0 {
 		if _, ok := reservations[pin-1]; ok {
-			pinReservationMutex.Lock()
-			defer pinReservationMutex.Unlock()
 			reservations[pin-1] = false
 		}
 	}

@@ -58,8 +58,6 @@ func (p Pin) c_int() C.int {
 
 const (
 	GPIO_NOCONNECT Pin = -1
-	GPIO_0         Pin = 30
-	GPIO_1         Pin = 31
 	GPIO_2         Pin = 8
 	GPIO_3         Pin = 9
 	GPIO_4         Pin = 7
@@ -90,8 +88,6 @@ const (
 
 var nameMapping = map[Pin]string{
 	GPIO_NOCONNECT: "GPIO_NOCONNECT",
-	GPIO_0:         "GPIO_0",
-	GPIO_1:         "GPIO_1",
 	GPIO_2:         "GPIO_2",
 	GPIO_3:         "GPIO_3",
 	GPIO_4:         "GPIO_4",
@@ -122,8 +118,6 @@ var nameMapping = map[Pin]string{
 
 // Maps Pi 3 GPIO Pins to physical pins
 var physicalMapping = map[Pin]int{
-	GPIO_0:  27,
-	GPIO_1:  28,
 	GPIO_2:  3,
 	GPIO_3:  5,
 	GPIO_4:  7,
@@ -234,7 +228,8 @@ func (p Pin) Exists() bool {
 	return ok
 }
 
-func ReserveComponentPins(pins ...Pin) error {
+func ReserveControlPins(pins ...Pin) error {
+	//Physical mutex here
 	reservedPins := map[Pin]bool{}
 	for _, p := range pins {
 		alreadyReserved, _ := reservedPins[p]

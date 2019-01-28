@@ -21,7 +21,7 @@ func NewSNx4HC594(
 	serial, serialClk, serialClr, registerClk, registerClr gpio.Pin,
 	clkWidth time.Duration) (*SNx4HC594, error) {
 
-	if err := gpio.ReserveComponentPins(serial, serialClk, serialClr, registerClk, registerClr); err != nil {
+	if err := gpio.ReserveControlPins(serial, serialClk, serialClr, registerClk, registerClr); err != nil {
 		return nil, err
 	}
 
