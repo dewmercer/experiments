@@ -44,6 +44,22 @@ func TestSNx4HC594(t *testing.T) {
 	}
 }
 
+func TestDoubleReserveSNx4HC594(t *testing.T) {
+
+	var snx4hc594_1, snx4hc594_2 *SNx4HC594
+	var err error
+	if snx4hc594_1, err = NewSNx4HC594(SER, SCLK, CLR_N, RCLK, CLR_N, time.Millisecond); err != nil {
+		t.Fatalf("failure to instantiate component: %q", err)
+	}
+	defer snx4hc594_1.AllClear()
+	defer snx4hc594_1.Release()
+
+	if snx4hc594_2, err = NewSNx4HC594(SER, SCLK, CLR_N, RCLK, CLR_N, time.Millisecond); err == nil {
+		snx4hc594_2.Release()
+		t.Fatal("double instantiation of component allowed")
+	}
+}
+
 func handleSigTerm(caught *bool, sigs ...os.Signal) {
 	if sigs == nil {
 		sigs = []os.Signal{syscall.SIGINT, syscall.SIGTERM, syscall.SIGHUP}

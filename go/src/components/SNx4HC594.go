@@ -1,7 +1,6 @@
 package components
 
 import (
-	"fmt"
 	"time"
 	"wiring_pi/gpio"
 )
@@ -21,19 +20,9 @@ type SNx4HC594 struct {
 func NewSNx4HC594(
 	serial, serialClk, serialClr, registerClk, registerClr gpio.Pin,
 	clkWidth time.Duration) (*SNx4HC594, error) {
-	controlPins := []gpio.Pin{serial, serialClk, serialClr, registerClk, registerClr}
-	reservedPins := map[gpio.Pin]bool{}
-	for _, p := range controlPins {
-		alreadyReserved, _ := reservedPins[p]
-		if p != gpio.GPIO_NOCONNECT && !alreadyReserved{
-			if err := p.Reserve(); err != nil {
-				for rp := range reservedPins {
-					rp.Release()
-				}
-				return nil, fmt.Errorf("cannot reserve %s: %q", p.Name(), err)
-			}
-			reservedPins[p] = true
-		}
+
+	if err := gpio.ReserveComponentPins(serial, serialClk, serialClr, registerClk, registerClr); err != nil {
+		return nil, err
 	}
 
 	ret := &SNx4HC594{
@@ -72,8 +61,8 @@ func NewSNx4HC594(
 	return ret, nil
 }
 
-func (sr *SNx4HC594) Release(){
-	for _, v := range []gpio.Pin{sr.serial, sr.serialClock, sr.serialClear, sr.registerClock,sr.registerClear}{
+func (sr *SNx4HC594) Release() {
+	for _, v := range []gpio.Pin{sr.serial, sr.serialClock, sr.serialClear, sr.registerClock, sr.registerClear} {
 		v.Release()
 	}
 }

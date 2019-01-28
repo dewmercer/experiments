@@ -9,4 +9,3 @@ func TestInitialize(t *testing.T) {
 		t.Fatalf("%s", err)
 	}
 }
-

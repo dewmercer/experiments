@@ -29,24 +29,15 @@ func NewSNx4HC590(
 		return nil, fmt.Errorf("expected 8 count pins or less but got %d", len(countPins))
 	}
 
-	for _, v := range countPins{
-	  if !v.Exists(){
-	  	return nil, fmt.Errorf("pin %s does not exist", v.Name())
-	  }
-	}
-
-	controlPins := []gpio.Pin{countClock, registerClock, clear, countEnable, outputEnable}
-	for i, p := range controlPins {
-		if p != gpio.GPIO_NOCONNECT {
-			if err := p.Reserve(); err != nil {
-				for j := 0; j < i; j++ {
-					controlPins[j].Release()
-				}
-				return nil, fmt.Errorf("cannot reserve %s: %q", p.Name(), err)
-			}
+	for _, v := range countPins {
+		if !v.Exists() {
+			return nil, fmt.Errorf("pin %s does not exist", v.Name())
 		}
 	}
 
+	if err := gpio.ReserveComponentPins(countClock, registerClock, clear, countEnable, outputEnable); err != nil {
+		return nil, err
+	}
 
 	ret := &SNx4HC590{
 		outputEnable:  outputEnable,
@@ -91,7 +82,7 @@ func NewSNx4HC590(
 	if len(countPins) != 0 {
 		if len(countPins) < 8 {
 			highPins := make([]gpio.Pin, 8-len(countPins))
-			for i, _ := range highPins {
+			for i := range highPins {
 				highPins[i] = gpio.GPIO_NOCONNECT
 			}
 			ret.countPins = append(highPins, countPins...)
@@ -108,8 +99,8 @@ func NewSNx4HC590(
 	return ret, nil
 }
 
-func (c *SNx4HC590)Release(){
-	for _, v := range []gpio.Pin{c.outputEnable,c.registerClock,c.countClock ,c.countEnable,c.clear}{
+func (c *SNx4HC590) Release() {
+	for _, v := range []gpio.Pin{c.outputEnable, c.registerClock, c.countClock, c.countEnable, c.clear} {
 		v.Release()
 	}
 }

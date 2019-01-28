@@ -17,9 +17,9 @@ func (pm PinMode) c_int() C.int {
 }
 
 const (
-	PM_INPUT         = C.INPUT
-	PM_OUTPUT        = C.OUTPUT
-	PM_PWM_OUTPUT    = C.PWM_OUTPUT
+	PM_INPUT            = C.INPUT
+	PM_OUTPUT           = C.OUTPUT
+	PM_PWM_OUTPUT       = C.PWM_OUTPUT
 	PM_GPIO_CLOCK       = C.GPIO_CLOCK
 	PM_SOFT_PWM_OUTPUT  = C.SOFT_PWM_OUTPUT
 	PM_SOFT_TONE_OUTPUT = C.SOFT_TONE_OUTPUT
@@ -46,8 +46,8 @@ func (pl PinLevel) c_int() C.int {
 
 const (
 	PL_UNDEFINED PinLevel = -1
-	PL_LOW  PinLevel = 0
-	PL_HIGH PinLevel = 1
+	PL_LOW       PinLevel = 0
+	PL_HIGH      PinLevel = 1
 )
 
 type Pin int
@@ -58,80 +58,80 @@ func (p Pin) c_int() C.int {
 
 const (
 	GPIO_NOCONNECT Pin = -1
-	GPIO_0  Pin = 30
-	GPIO_1  Pin = 31
-	GPIO_2  Pin = 8
-	GPIO_3  Pin = 9
-	GPIO_4  Pin = 7
-	GPIO_5  Pin = 21
-	GPIO_6  Pin = 22
-	GPIO_7  Pin = 11
-	GPIO_8  Pin = 10
-	GPIO_9  Pin = 13
-	GPIO_10 Pin = 12
-	GPIO_11 Pin = 14
-	GPIO_12 Pin = 26
-	GPIO_13 Pin = 23
-	GPIO_14 Pin = 15
-	GPIO_15 Pin = 16
-	GPIO_16 Pin = 27
-	GPIO_17 Pin = 0
-	GPIO_18 Pin = 1
-	GPIO_19 Pin = 24
-	GPIO_20 Pin = 28
-	GPIO_21 Pin = 29
-	GPIO_22 Pin = 3
-	GPIO_23 Pin = 4
-	GPIO_24 Pin = 5
-	GPIO_25 Pin = 6
-	GPIO_26 Pin = 25
-	GPIO_27 Pin = 2
+	GPIO_0         Pin = 30
+	GPIO_1         Pin = 31
+	GPIO_2         Pin = 8
+	GPIO_3         Pin = 9
+	GPIO_4         Pin = 7
+	GPIO_5         Pin = 21
+	GPIO_6         Pin = 22
+	GPIO_7         Pin = 11
+	GPIO_8         Pin = 10
+	GPIO_9         Pin = 13
+	GPIO_10        Pin = 12
+	GPIO_11        Pin = 14
+	GPIO_12        Pin = 26
+	GPIO_13        Pin = 23
+	GPIO_14        Pin = 15
+	GPIO_15        Pin = 16
+	GPIO_16        Pin = 27
+	GPIO_17        Pin = 0
+	GPIO_18        Pin = 1
+	GPIO_19        Pin = 24
+	GPIO_20        Pin = 28
+	GPIO_21        Pin = 29
+	GPIO_22        Pin = 3
+	GPIO_23        Pin = 4
+	GPIO_24        Pin = 5
+	GPIO_25        Pin = 6
+	GPIO_26        Pin = 25
+	GPIO_27        Pin = 2
 )
 
 var nameMapping = map[Pin]string{
-	GPIO_NOCONNECT  : "GPIO_NOCONNECT",
-	GPIO_0: "GPIO_0",
-	GPIO_1: "GPIO_1",
-	GPIO_2: "GPIO_2",
-	GPIO_3: "GPIO_3",
-	GPIO_4: "GPIO_4",
-	GPIO_5: "GPIO_5",
-	GPIO_6: "GPIO_6",
-	GPIO_7: "GPIO_7",
-	GPIO_8: "GPIO_8",
-	GPIO_9: "GPIO_9",
-	GPIO_10: "GPIO_10",
-	GPIO_11: "GPIO_11",
-	GPIO_12: "GPIO_12",
-	GPIO_13: "GPIO_13",
-	GPIO_14: "GPIO_14",
-	GPIO_15: "GPIO_15",
-	GPIO_16: "GPIO_16",
-	GPIO_17: "GPIO_17",
-	GPIO_18: "GPIO_18",
-	GPIO_19: "GPIO_19",
-	GPIO_20: "GPIO_20",
-	GPIO_21: "GPIO_21",
-	GPIO_22: "GPIO_22",
-	GPIO_23: "GPIO_23",
-	GPIO_24: "GPIO_24",
-	GPIO_25: "GPIO_25",
-	GPIO_26: "GPIO_25",
-	GPIO_27: "GPIO_27",
+	GPIO_NOCONNECT: "GPIO_NOCONNECT",
+	GPIO_0:         "GPIO_0",
+	GPIO_1:         "GPIO_1",
+	GPIO_2:         "GPIO_2",
+	GPIO_3:         "GPIO_3",
+	GPIO_4:         "GPIO_4",
+	GPIO_5:         "GPIO_5",
+	GPIO_6:         "GPIO_6",
+	GPIO_7:         "GPIO_7",
+	GPIO_8:         "GPIO_8",
+	GPIO_9:         "GPIO_9",
+	GPIO_10:        "GPIO_10",
+	GPIO_11:        "GPIO_11",
+	GPIO_12:        "GPIO_12",
+	GPIO_13:        "GPIO_13",
+	GPIO_14:        "GPIO_14",
+	GPIO_15:        "GPIO_15",
+	GPIO_16:        "GPIO_16",
+	GPIO_17:        "GPIO_17",
+	GPIO_18:        "GPIO_18",
+	GPIO_19:        "GPIO_19",
+	GPIO_20:        "GPIO_20",
+	GPIO_21:        "GPIO_21",
+	GPIO_22:        "GPIO_22",
+	GPIO_23:        "GPIO_23",
+	GPIO_24:        "GPIO_24",
+	GPIO_25:        "GPIO_25",
+	GPIO_26:        "GPIO_25",
+	GPIO_27:        "GPIO_27",
 }
 
 // Maps Pi 3 GPIO Pins to physical pins
 var physicalMapping = map[Pin]int{
-	GPIO_0 : 27,
-	GPIO_1 : 28,
-	GPIO_2 : 3,
-	GPIO_3 : 5,
-	GPIO_4 : 7,
-	GPIO_5 : 29,
-	GPIO_6 : 31,
-	GPIO_7 : 26,
-	GPIO_8 : 24,
-	GPIO_9 : 21,
+	GPIO_0:  27,
+	GPIO_1:  28,
+	GPIO_2:  3,
+	GPIO_3:  5,
+	GPIO_4:  7,
+	GPIO_5:  29,
+	GPIO_6:  31,
+	GPIO_7:  26,
+	GPIO_8:  24,
+	GPIO_9:  21,
 	GPIO_10: 19,
 	GPIO_11: 23,
 	GPIO_12: 32,
@@ -197,39 +197,56 @@ func (pin Pin) DigitalRead() (PinLevel, error) {
 }
 
 func (p Pin) Reserve() error {
-	if p == GPIO_NOCONNECT{
+	if p == GPIO_NOCONNECT {
 		return nil
 	}
 
-	if pp, ok := physicalMapping[p];!ok{
+	if pp, ok := physicalMapping[p]; !ok {
 		return fmt.Errorf("no physical mapping for GPIO pin %d", p)
-	} else if err := physical_pin.Reserve(pp); err != nil{
+	} else if err := physical_pin.Reserve(pp); err != nil {
 		return fmt.Errorf("error reserving pin %s: %q", p.Name(), err)
 	}
 	return nil
 }
 
-func (p Pin)Release(){
-	if p == GPIO_NOCONNECT{
+func (p Pin) Release() {
+	if p == GPIO_NOCONNECT {
 		return
 	}
 
-	if pp, ok := physicalMapping[p];ok {
+	if pp, ok := physicalMapping[p]; ok {
 		physical_pin.Release(pp)
 	}
 }
 
-func (p Pin)Name() string{
-	if name, ok := nameMapping[p];ok{
+func (p Pin) Name() string {
+	if name, ok := nameMapping[p]; ok {
 		return name
 	}
 	return "unknown pin"
 }
 
-func (p Pin)Exists() bool{
-	if p == GPIO_NOCONNECT{
+func (p Pin) Exists() bool {
+	if p == GPIO_NOCONNECT {
 		return true
 	}
-	_, ok:=physicalMapping[p]
+	_, ok := physicalMapping[p]
 	return ok
+}
+
+func ReserveComponentPins(pins ...Pin) error {
+	reservedPins := map[Pin]bool{}
+	for _, p := range pins {
+		alreadyReserved, _ := reservedPins[p]
+		if p != GPIO_NOCONNECT && !alreadyReserved {
+			if err := p.Reserve(); err != nil {
+				for rp := range reservedPins {
+					rp.Release()
+				}
+				return fmt.Errorf("cannot reserve %s: %q", p.Name(), err)
+			}
+			reservedPins[p] = true
+		}
+	}
+	return nil
 }
