@@ -8,6 +8,7 @@ import (
 	"testing"
 	"time"
 	"wiring_pi"
+	"wiring_pi/gpio"
 )
 
 func init() {
@@ -18,24 +19,28 @@ func init() {
 }
 
 const (
-	SER   = wiring_pi.GPIO_18
-	RCLK  = wiring_pi.GPIO_19
-	SCLK  = wiring_pi.GPIO_20
-	CLR_N = wiring_pi.GPIO_21
+	SER   = gpio.GPIO_18
+	RCLK  = gpio.GPIO_19
+	SCLK  = gpio.GPIO_20
+	CLR_N = gpio.GPIO_21
 )
 
-func Test74594(t *testing.T) {
+func TestSNx4HC594(t *testing.T) {
+
 	stop := false
 	handleSigTerm(&stop)
 
-	sr74594 := NewSNx4HC594(SER, SCLK, CLR_N, RCLK, CLR_N, time.Millisecond)
-	defer sr74594.AllClear()
+	var snx4hc594 *SNx4HC594
+	var err error
+	if snx4hc594, err = NewSNx4HC594(SER, SCLK, CLR_N, RCLK, CLR_N, time.Millisecond); err != nil {
+		t.Fatalf("failure to instantiate component: %q", err)
+	}
+	defer snx4hc594.AllClear()
+	defer snx4hc594.Release()
 
-	for !stop {
-		for i := 0; i <= 0xFF && !stop; i++ {
-			sr74594.LoadAndLatch(byte(i))
-			time.Sleep(10 * time.Millisecond)
-		}
+	for i := 0; i <= 0xFF && !stop; i++ {
+		snx4hc594.LoadAndLatch(byte(i))
+		time.Sleep(10 * time.Millisecond)
 	}
 }
 

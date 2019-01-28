@@ -1,25 +1,40 @@
 package components
 
 import (
+	"fmt"
 	"time"
-	"wiring_pi"
+	"wiring_pi/gpio"
 )
 
 type SNx4HC594 struct {
-	serial wiring_pi.Pin
+	serial gpio.Pin
 
-	serialClock wiring_pi.Pin
-	serialClear wiring_pi.Pin
+	serialClock gpio.Pin
+	serialClear gpio.Pin
 
-	registerClock wiring_pi.Pin
-	registerClear wiring_pi.Pin
+	registerClock gpio.Pin
+	registerClear gpio.Pin
 
 	clkWidth time.Duration
 }
 
 func NewSNx4HC594(
-	serial, serialClk, serialClr, registerClk, registerClr wiring_pi.Pin,
-	clkWidth time.Duration) *SNx4HC594 {
+	serial, serialClk, serialClr, registerClk, registerClr gpio.Pin,
+	clkWidth time.Duration) (*SNx4HC594, error) {
+	controlPins := []gpio.Pin{serial, serialClk, serialClr, registerClk, registerClr}
+	reservedPins := map[gpio.Pin]bool{}
+	for _, p := range controlPins {
+		alreadyReserved, _ := reservedPins[p]
+		if p != gpio.GPIO_NOCONNECT && !alreadyReserved{
+			if err := p.Reserve(); err != nil {
+				for rp := range reservedPins {
+					rp.Release()
+				}
+				return nil, fmt.Errorf("cannot reserve %s: %q", p.Name(), err)
+			}
+			reservedPins[p] = true
+		}
+	}
 
 	ret := &SNx4HC594{
 		serial:        serial,
@@ -30,31 +45,37 @@ func NewSNx4HC594(
 		clkWidth:      clkWidth,
 	}
 
-	ret.serial.Mode(wiring_pi.OUTPUT)
-	ret.serial.PullUpDown(wiring_pi.PUD_DOWN)
+	ret.serial.Mode(gpio.PM_OUTPUT)
+	ret.serial.PullUpDown(gpio.PUD_DOWN)
 
-	ret.serialClock.Mode(wiring_pi.OUTPUT)
-	ret.serialClock.DigitalWrite(wiring_pi.PL_LOW)
-	ret.serialClock.PullUpDown(wiring_pi.PUD_DOWN)
+	ret.serialClock.Mode(gpio.PM_OUTPUT)
+	ret.serialClock.DigitalWrite(gpio.PL_LOW)
+	ret.serialClock.PullUpDown(gpio.PUD_DOWN)
 
 	if ret.serialClock != ret.registerClock {
-		ret.registerClock.Mode(wiring_pi.OUTPUT)
-		ret.registerClock.DigitalWrite(wiring_pi.PL_LOW)
-		ret.registerClock.PullUpDown(wiring_pi.PUD_DOWN)
+		ret.registerClock.Mode(gpio.PM_OUTPUT)
+		ret.registerClock.DigitalWrite(gpio.PL_LOW)
+		ret.registerClock.PullUpDown(gpio.PUD_DOWN)
 	}
 
-	ret.serialClear.Mode(wiring_pi.OUTPUT)
-	ret.serialClear.DigitalWrite(wiring_pi.PL_HIGH)
-	ret.serialClear.PullUpDown(wiring_pi.PUD_UP)
+	ret.serialClear.Mode(gpio.PM_OUTPUT)
+	ret.serialClear.DigitalWrite(gpio.PL_HIGH)
+	ret.serialClear.PullUpDown(gpio.PUD_UP)
 
 	if ret.serialClear != ret.registerClear {
-		ret.registerClear.Mode(wiring_pi.OUTPUT)
-		ret.registerClear.DigitalWrite(wiring_pi.PL_HIGH)
-		ret.registerClear.PullUpDown(wiring_pi.PUD_UP)
+		ret.registerClear.Mode(gpio.PM_OUTPUT)
+		ret.registerClear.DigitalWrite(gpio.PL_HIGH)
+		ret.registerClear.PullUpDown(gpio.PUD_UP)
 	}
 
 	ret.AllClear()
-	return ret
+	return ret, nil
+}
+
+func (sr *SNx4HC594) Release(){
+	for _, v := range []gpio.Pin{sr.serial, sr.serialClock, sr.serialClear, sr.registerClock,sr.registerClear}{
+		v.Release()
+	}
 }
 
 func (sr *SNx4HC594) SerialClear() {
@@ -74,7 +95,7 @@ func (sr *SNx4HC594) AllClear() {
 
 func (sr *SNx4HC594) Load(data byte) {
 	for i := 0; i < 8; i++ {
-		sr.serial.DigitalWrite(wiring_pi.PinLevel(data & 0x80))
+		sr.serial.DigitalWrite(gpio.PinLevel(data & 0x80))
 		sr.serialClock.PulseHigh(sr.clkWidth)
 		data <<= 1
 	}
