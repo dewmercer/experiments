@@ -1,26 +1,29 @@
 package spi
 
-// #cgo LDFLAGS: -lwiringPi
+// #cgo LDFLAGS: -lwiringPi -L$GOPATH/lib
+// #cgo CFLAGS: -I$GOPATH/include
 // #include <wiringPiSPI.h>
+// #include <stdlib.h>
 import "C"
+
 import (
 	"fmt"
 	"sync"
 	"wiring_pi/physical_pin"
 )
 
-type SPI struct {
+type SPI struct{
 	channel Channel
+	fd C.int
 }
 
 type Channel int
-
 const (
 	Channel_0 Channel = 0
 	Channel_1 Channel = 1
 )
 
-func (c Channel) Name() string {
+func (c Channel)Name() string{
 	switch c {
 	case Channel_0:
 		return "Channel_0"
@@ -29,7 +32,7 @@ func (c Channel) Name() string {
 	}
 }
 
-func (c Channel) c_int() C.int {
+func (c Channel)c_int() C.int{
 	switch c {
 	case Channel_0:
 		return C.int(0)
@@ -39,16 +42,15 @@ func (c Channel) c_int() C.int {
 }
 
 var reservedChannels = map[Channel]bool{
-	Channel_0: false,
-	Channel_1: false,
+	Channel_0:false,
+	Channel_1:false,
 }
 
 type Pin int
-
 const (
 	mosi Pin = 19
 	miso Pin = 21
-	clk  Pin = 23
+	clk Pin = 23
 	ce_0 Pin = 24
 	ce_1 Pin = 26
 )
@@ -61,12 +63,12 @@ var pinName = map[Pin]string{
 	ce_1: "CE_1",
 }
 
-func (p Pin) Int() int {
+func (p Pin)Int() int{
 	return int(p)
 }
 
-func (p Pin) Name() string {
-	if name, ok := pinName[p]; ok {
+func (p Pin)Name() string{
+	if name, ok := pinName[p];ok{
 		return name
 	}
 	return "unknown pin"
@@ -74,11 +76,13 @@ func (p Pin) Name() string {
 
 var spiReservationMutex = sync.Mutex{}
 
-func NewSPI(channel Channel, speed int) (*SPI, error) {
+var commonControlPins  = []Pin{mosi, miso, clk}
+
+func NewSPI (channel Channel, speed int) (*SPI, error) {
 	spiReservationMutex.Lock()
 	defer spiReservationMutex.Unlock()
 
-	if reservedChannels[channel] {
+	if reservedChannels[channel]{
 		return nil, fmt.Errorf("channel %s already reserved", channel.Name())
 	}
 
@@ -86,17 +90,16 @@ func NewSPI(channel Channel, speed int) (*SPI, error) {
 	defer physical_pin.PinReservationMutex.Unlock()
 
 	pinsToRelease := []int{}
-	commonPins := []Pin{mosi, miso, clk}
 
-	if !reservedChannels[Channel_0] && !reservedChannels[Channel_1] {
-		for i := 0; i < len(commonPins); i++ {
-			if err := physical_pin.UnsynchronizedReserve(commonPins[i].Int()); err != nil {
+	if !reservedChannels[Channel_0] && !reservedChannels[Channel_1]{
+		for i := 0;i<len(commonControlPins);i++{
+			if err := physical_pin.UnsynchronizedReserve(commonControlPins[i].Int()); err != nil{
 				for p := range pinsToRelease {
 					physical_pin.Release(p)
 				}
-				return nil, fmt.Errorf("cannot reserve pin %s: %q", commonPins[i].Name(), err)
+				return nil, fmt.Errorf("cannot reserve pin %s: %q", commonControlPins[i].Name(), err)
 			}
-			pinsToRelease = append(pinsToRelease, commonPins[i].Int())
+			pinsToRelease = append(pinsToRelease, commonControlPins[i].Int())
 		}
 	}
 
@@ -108,39 +111,61 @@ func NewSPI(channel Channel, speed int) (*SPI, error) {
 		channelPin = ce_1
 	}
 
-	if err := physical_pin.UnsynchronizedReserve(channelPin.Int()); err != nil {
+	if err := physical_pin.UnsynchronizedReserve(channelPin.Int()); err != nil{
 		for p := range pinsToRelease {
 			physical_pin.Release(p)
 		}
 		return nil, fmt.Errorf("cannot reserve pin %s: %q", channelPin.Name(), err)
 	}
 
-	if res := C.wiringPiSPISetup(channel.c_int(), C.int(speed)); res <= 0 {
-		return nil, fmt.Errorf("wiringPiSPISetup returned %d", int(res))
+	spi := &SPI{channel:channel}
+	if spi.fd = C.wiringPiSPISetup(channel.c_int(), C.int(speed)); spi.fd <= 0{
+		spi.unsynchronizedRelease()
+		return nil, fmt.Errorf("wiringPiSPISetup returned %d", int(spi.fd))
 	}
 
 	reservedChannels[channel] = true
-	return &SPI{channel: channel}, nil
+	return spi, nil
 }
 
-func (s SPI) Release() {
+func (s SPI)Release(){
+	spiReservationMutex.Lock()
+	defer spiReservationMutex.Unlock()
+
 	physical_pin.PinReservationMutex.Lock()
 	defer physical_pin.PinReservationMutex.Unlock()
+	s.unsynchronizedRelease()
+}
 
+func (s SPI) unsynchronizedRelease(){
 	releaseAll := false
-	switch s.channel {
+	switch s.channel{
 	case Channel_0:
 		physical_pin.UnsynchronizedRelease(ce_0.Int())
+		reservedChannels[Channel_0] = false
 		releaseAll = !reservedChannels[Channel_1]
 	default:
 		physical_pin.UnsynchronizedRelease(ce_1.Int())
+		reservedChannels[Channel_1] = false
 		releaseAll = !reservedChannels[Channel_0]
 	}
 
-	if releaseAll {
-		commonPins := []Pin{mosi, miso, clk}
-		for _, v := range commonPins {
+	if releaseAll{
+		for _, v := range commonControlPins {
 			physical_pin.UnsynchronizedRelease(v.Int())
 		}
 	}
 }
+
+func (s SPI)ReadWrite(buffer []byte)([]byte, error){
+	cData := C.CBytes(buffer)
+	cLen := C.int(len(buffer))
+	defer C.free(cData)
+
+	if res, err := C.wiringPiSPIDataRW(s.channel.c_int(), (*C.uchar)(cData), cLen); res == C.int(-1){
+		return nil, fmt.Errorf("error calling wiringPiSPIDataRW. errno: %d", err)
+	}
+
+	return C.GoBytes(cData, cLen), nil
+}
+
