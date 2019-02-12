@@ -1,14 +1,15 @@
 package components
 
 import (
+	"encoding/hex"
 	"log"
 	"os"
 	"os/signal"
 	"syscall"
 	"testing"
-	"time"
 	"wiring_pi"
 	"wiring_pi/gpio"
+	"wiring_pi/spi"
 )
 
 func init() {
@@ -25,6 +26,7 @@ const (
 	CLR_N = gpio.GPIO_21
 )
 
+/*
 func TestSNx4HC594(t *testing.T) {
 
 	stop := false
@@ -57,6 +59,23 @@ func TestDoubleReserveSNx4HC594(t *testing.T) {
 	if snx4hc594_2, err = NewSNx4HC594(SER, SCLK, CLR_N, RCLK, CLR_N, time.Millisecond); err == nil {
 		snx4hc594_2.Release()
 		t.Fatal("double instantiation of component allowed")
+	}
+}
+*/
+func TestNewTLV2556(t *testing.T){
+	adc, err := NewTLV2556(spi.Channel_0, 9600)
+	if err != nil{
+		t.Errorf("instantiating TLV2556: %q", err)
+	}
+	defer adc.Release()
+
+	var val int
+	for i := 0;i<TLV2556IPWR_NUM_INPUT_LINES;i++{
+		val, err = adc.ReadPin(i)
+		if err != nil{
+			t.Errorf("reading pin ")
+		}
+		t.Logf("pin %d: %s\n", i, hex.EncodeToString([]byte{byte(val)}))
 	}
 }
 
