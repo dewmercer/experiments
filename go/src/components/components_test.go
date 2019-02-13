@@ -2,11 +2,13 @@ package components
 
 import (
 	"encoding/hex"
+	"fmt"
 	"log"
 	"os"
 	"os/signal"
 	"syscall"
 	"testing"
+	"time"
 	"wiring_pi"
 	"wiring_pi/gpio"
 	"wiring_pi/spi"
@@ -26,7 +28,7 @@ const (
 	CLR_N = gpio.GPIO_21
 )
 
-/*
+
 func TestSNx4HC594(t *testing.T) {
 
 	stop := false
@@ -61,21 +63,30 @@ func TestDoubleReserveSNx4HC594(t *testing.T) {
 		t.Fatal("double instantiation of component allowed")
 	}
 }
-*/
+
 func TestNewTLV2556(t *testing.T){
-	adc, err := NewTLV2556(spi.Channel_0, 9600)
+	stop := false
+	handleSigTerm(&stop)
+
+	adc, err := NewTLV2556(spi.Channel_0, 54000)
 	if err != nil{
 		t.Errorf("instantiating TLV2556: %q", err)
 	}
 	defer adc.Release()
 
-	var val int
-	for i := 0;i<TLV2556IPWR_NUM_INPUT_LINES;i++{
-		val, err = adc.ReadPin(i)
-		if err != nil{
-			t.Errorf("reading pin ")
+	for ;true && !stop; {
+		pins := make([]byte, TLV2556IPWR_NUM_INPUT_LINES+1)
+		for i, _ := range pins {
+			pin := (byte(i) << 4) | CFGR1
+			adc.Write1(pin)
+			pins[i], err = adc.Read1()
 		}
-		t.Logf("pin %d: %s\n", i, hex.EncodeToString([]byte{byte(val)}))
+
+		for _, v := range pins {
+			fmt.Printf("%s ", hex.EncodeToString([]byte{v}))
+		}
+		println()
+		time.Sleep(5 * time.Second)
 	}
 }
 

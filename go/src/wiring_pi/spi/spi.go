@@ -14,7 +14,9 @@ import (
 )
 
 func init(){
-	wiring_pi.Init()
+	if err := wiring_pi.Init(); err != nil{
+		panic(fmt.Sprintf("initializing: %q", err))
+	}
 }
 
 type SPI struct{
@@ -173,10 +175,12 @@ func (s *SPI) unsynchronizedRelease(){
 
 func (s *SPI)ReadWrite(buffer []byte)([]byte, error){
 	cData := C.CBytes(buffer)
-	cLen := C.int(len(buffer))
 	defer C.free(cData)
 
-	if res, err := C.wiringPiSPIDataRW(s.channel.c_int(), (*C.uchar)(cData), cLen); res == C.int(-1){
+	cDataPtr := (*C.uchar)(cData)
+	cLen := C.int(len(buffer))
+
+	if res, err := C.wiringPiSPIDataRW(s.channel.c_int(), cDataPtr, cLen); res == C.int(-1){
 		return nil, fmt.Errorf("error calling wiringPiSPIDataRW. errno: %d: %q", res, err)
 	}
 	return C.GoBytes(cData, cLen), nil

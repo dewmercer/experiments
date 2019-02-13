@@ -1,7 +1,6 @@
 package components
 
 import (
-	"encoding/hex"
 	"fmt"
 	"wiring_pi/spi"
 )
@@ -14,36 +13,36 @@ TLV2556IPWR_NUM_CHANNELS = 0x0F
 TLV2556IPWR_NUM_INPUT_LINES = 11
 
 // = CFGR1 = Bits
-TLV2556IPWR_8_BIT_OUTPUT = 0x04
-TLV2556IPWR_12_BIT_OUTPUT = 0x08
-TLV2556IPWR_16_BIT_OUTPUT = 0x0c
+TLV2556IPWR_8_BIT_OUTPUT byte = 0x04
+TLV2556IPWR_12_BIT_OUTPUT byte = 0x08
+TLV2556IPWR_16_BIT_OUTPUT byte = 0x0c
 
-TLV2556IPWR_MSB_FIRST = 0x00
-TLV2556IPWR_LSB_FIRST = 0x20
+TLV2556IPWR_MSB_FIRST byte = 0x00
+TLV2556IPWR_LSB_FIRST byte = 0x20
 
-TLV2556IPWR_UNIPOLAR_OUTPUT = 0x00
-TLV2556IPWR_TWOS_COMPLIMENT_OUTPUT = 0x01
+TLV2556IPWR_UNIPOLAR_OUTPUT byte = 0x00
+TLV2556IPWR_TWOS_COMPLIMENT_OUTPUT byte = 0x01
 
 // = CFGR2 = Bits
-TLV2556IPWR_SELECT_CFGR2 = 0xF0
+TLV2556IPWR_SELECT_CFGR2 byte = 0xF0
 
-TLV2556IPWR_INTERNAL_4V_REF = 0x00
+TLV2556IPWR_INTERNAL_4V_REF byte = 0x00
 TLV2556IPWR_INTERNAL_2V_REF = 0x04
-TLV2556IPWR_EXTERNAL_REF = 0x0c
+TLV2556IPWR_EXTERNAL_REF byte = 0x0c
 
-TLV2556IPWR_19_EOC = 0x00
-TLV2556IPWR_19_INT = 0x02
+TLV2556IPWR_19_EOC byte = 0x00
+TLV2556IPWR_19_INT byte = 0x02
 
-TLV2556IPWR_NORMAL_MODE = 0x00
-TLV2556IPWR_DEFAULT_MODE = 0x01
+TLV2556IPWR_NORMAL_MODE byte = 0x00
+TLV2556IPWR_DEFAULT_MODE byte = 0x01
 
-CFGR1 = TLV2556IPWR_8_BIT_OUTPUT   |
-TLV2556IPWR_MSB_FIRST      |
+CFGR1 = TLV2556IPWR_8_BIT_OUTPUT        |
+TLV2556IPWR_MSB_FIRST                   |
 TLV2556IPWR_UNIPOLAR_OUTPUT;
 
-CFGR2 = TLV2556IPWR_SELECT_CFGR2   |
-TLV2556IPWR_EXTERNAL_REF   |
-TLV2556IPWR_19_EOC         |
+CFGR2 = TLV2556IPWR_SELECT_CFGR2        |
+TLV2556IPWR_EXTERNAL_REF                |
+TLV2556IPWR_19_EOC                      |
 TLV2556IPWR_NORMAL_MODE;
 )
 
@@ -71,16 +70,16 @@ func (adc *tlv2556)Release(){
 }
 
 func (adc *tlv2556)ReadPin(pin int) (int, error) {
-	fmt.Printf("ReadPin %d\n", pin)
-
-	formattedPin := byte((pin << 4) | CFGR1)
-	fmt.Printf("\tFormatted Pin: %s\n", hex.EncodeToString([]byte{formattedPin}))
-	readCommand := []byte{formattedPin, formattedPin}
-	res, err := adc.ReadWrite(readCommand)
-	if err != nil {
+	formattedPin := byte((byte(pin) << 4) | CFGR1)
+	err := adc.Write1(formattedPin)
+	if err != nil{
 		return -1, err
 	}
-	fmt.Printf("\tRead result: %s\n\n", hex.EncodeToString(res))
+	var data byte
+	data, err = adc.Read1()
+	if err != nil{
+		return -1, err
+	}
 
-	return int(res[1]), nil
+	return int(data), nil
 }
