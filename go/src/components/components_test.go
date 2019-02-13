@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 	"os/signal"
+	"strings"
 	"syscall"
 	"testing"
 	"time"
@@ -64,30 +65,38 @@ func TestDoubleReserveSNx4HC594(t *testing.T) {
 	}
 }
 
-func TestNewTLV2556(t *testing.T){
+func TestNewTLV2556(t *testing.T) {
 	stop := false
 	handleSigTerm(&stop)
 
-	adc, err := NewTLV2556(spi.Channel_0, 54000)
-	if err != nil{
+	adc, err := NewTLV2556(spi.Channel_0, 54000, 5.0)
+	if err != nil {
 		t.Errorf("instantiating TLV2556: %q", err)
 	}
 	defer adc.Release()
 
-	for ;true && !stop; {
-		pins := make([]byte, TLV2556IPWR_NUM_INPUT_LINES+1)
-		for i, _ := range pins {
-			pin := (byte(i) << 4) | CFGR1
-			adc.Write1(pin)
-			pins[i], err = adc.Read1()
+	var logLine= &strings.Builder{}
+	var iVal int
+	for i := 0; i < TLV2556IPWR_NUM_INPUT_LINES; i++ {
+		iVal, err = adc.ReadRaw(i)
+		if err != nil {
+			t.Errorf("readRaw: %q", err)
 		}
-
-		for _, v := range pins {
-			fmt.Printf("%s ", hex.EncodeToString([]byte{v}))
-		}
-		println()
-		time.Sleep(5 * time.Second)
+		logLine.WriteString(fmt.Sprintf("%s ", hex.EncodeToString([]byte{byte(iVal)})))
 	}
+	t.Logf(logLine.String())
+
+	logLine.Reset()
+
+	var fVal float32
+	for i := 0; i < TLV2556IPWR_NUM_INPUT_LINES; i++ {
+		fVal, err = adc.Read(i)
+		if err != nil {
+			t.Errorf("read: %q", err)
+		}
+		logLine.WriteString(fmt.Sprintf("%f ", fVal))
+	}
+	t.Logf(logLine.String())
 }
 
 func handleSigTerm(caught *bool, sigs ...os.Signal) {
