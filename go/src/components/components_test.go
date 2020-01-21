@@ -1,14 +1,18 @@
 package components
 
 import (
+	"encoding/hex"
+	"fmt"
 	"log"
 	"os"
 	"os/signal"
+	"strings"
 	"syscall"
 	"testing"
 	"time"
 	"wiring_pi"
 	"wiring_pi/gpio"
+	"wiring_pi/spi"
 )
 
 func init() {
@@ -24,6 +28,7 @@ const (
 	SCLK  = gpio.GPIO_20
 	CLR_N = gpio.GPIO_21
 )
+
 
 func TestSNx4HC594(t *testing.T) {
 
@@ -58,6 +63,40 @@ func TestDoubleReserveSNx4HC594(t *testing.T) {
 		snx4hc594_2.Release()
 		t.Fatal("double instantiation of component allowed")
 	}
+}
+
+func TestNewTLV2556(t *testing.T) {
+	stop := false
+	handleSigTerm(&stop)
+
+	adc, err := NewTLV2556(spi.Channel_0, 54000, 5.0)
+	if err != nil {
+		t.Errorf("instantiating TLV2556: %q", err)
+	}
+	defer adc.Release()
+
+	var logLine= &strings.Builder{}
+	var iVal int
+	for i := 0; i < TLV2556IPWR_NUM_INPUT_LINES; i++ {
+		iVal, err = adc.ReadRaw(i)
+		if err != nil {
+			t.Errorf("readRaw: %q", err)
+		}
+		logLine.WriteString(fmt.Sprintf("%s ", hex.EncodeToString([]byte{byte(iVal)})))
+	}
+	t.Logf(logLine.String())
+
+	logLine.Reset()
+
+	var fVal float32
+	for i := 0; i < TLV2556IPWR_NUM_INPUT_LINES; i++ {
+		fVal, err = adc.Read(i)
+		if err != nil {
+			t.Errorf("read: %q", err)
+		}
+		logLine.WriteString(fmt.Sprintf("%f ", fVal))
+	}
+	t.Logf(logLine.String())
 }
 
 func handleSigTerm(caught *bool, sigs ...os.Signal) {
