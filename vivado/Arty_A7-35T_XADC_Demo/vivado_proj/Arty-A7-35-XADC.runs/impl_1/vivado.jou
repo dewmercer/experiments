@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2019.2.1 (64-bit)
+# SW Build 2729669 on Thu Dec  5 04:48:12 MST 2019
+# IP Build 2729494 on Thu Dec  5 07:38:25 MST 2019
+# Start of session at: Tue Jan 21 00:24:01 2020
+# Process ID: 2145
+# Current directory: /home/dmercer/src/experiments/vivado/Arty_A7-35T_XADC_Demo/vivado_proj/Arty-A7-35-XADC.runs/impl_1
+# Command line: vivado -log XADCdemo.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source XADCdemo.tcl -notrace
+# Log file: /home/dmercer/src/experiments/vivado/Arty_A7-35T_XADC_Demo/vivado_proj/Arty-A7-35-XADC.runs/impl_1/XADCdemo.vdi
+# Journal file: /home/dmercer/src/experiments/vivado/Arty_A7-35T_XADC_Demo/vivado_proj/Arty-A7-35-XADC.runs/impl_1/vivado.jou
+#-----------------------------------------------------------
+source XADCdemo.tcl -notrace

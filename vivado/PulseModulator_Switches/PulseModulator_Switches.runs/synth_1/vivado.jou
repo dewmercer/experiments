@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2019.2.1 (64-bit)
+# SW Build 2729669 on Thu Dec  5 04:48:12 MST 2019
+# IP Build 2729494 on Thu Dec  5 07:38:25 MST 2019
+# Start of session at: Mon Jan 20 15:01:50 2020
+# Process ID: 22084
+# Current directory: /home/dmercer/src/experiments/vivado/PulseModulator_Switches/PulseModulator_Switches.runs/synth_1
+# Command line: vivado -log main.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source main.tcl
+# Log file: /home/dmercer/src/experiments/vivado/PulseModulator_Switches/PulseModulator_Switches.runs/synth_1/main.vds
+# Journal file: /home/dmercer/src/experiments/vivado/PulseModulator_Switches/PulseModulator_Switches.runs/synth_1/vivado.jou
+#-----------------------------------------------------------
+source main.tcl -notrace
