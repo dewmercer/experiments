@@ -82,8 +82,6 @@ COMPONENT xadc_wiz_0
     vauxn14 : IN STD_LOGIC;
     vauxp15 : IN STD_LOGIC;
     vauxn15 : IN STD_LOGIC;
-    vccint_alarm_out : OUT STD_LOGIC;
-    vccaux_alarm_out : OUT STD_LOGIC;
     channel_out : OUT STD_LOGIC_VECTOR(4 DOWNTO 0);
     eoc_out : OUT STD_LOGIC;
     alarm_out : OUT STD_LOGIC;
@@ -127,8 +125,6 @@ your_instance_name : xadc_wiz_0
     vauxn14 => vauxn14,
     vauxp15 => vauxp15,
     vauxn15 => vauxn15,
-    vccint_alarm_out => vccint_alarm_out,
-    vccaux_alarm_out => vccaux_alarm_out,
     channel_out => channel_out,
     eoc_out => eoc_out,
     alarm_out => alarm_out,

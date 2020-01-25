@@ -1,0 +1,7 @@
+Running: xsim.dir/XADCdemo_behav/xsimk -simmode gui -wdb XADCdemo_behav.wdb -simrunnum 0 -socket 55417
+Design successfully loaded
+Design Loading Memory Usage: 34664 KB (Peak: 34664 KB)
+Design Loading CPU Usage: 50 ms
+Simulation completed
+Simulation Memory Usage: 121020 KB (Peak: 173932 KB)
+Simulation CPU Usage: 70 ms

@@ -1,4 +1,4 @@
-`timescale 1ns / 1ps
+`timescale 1ns / 1ns
 //////////////////////////////////////////////////////////////////////////////////
 // Company: Digilent inc.
 // Engineer: Samuel Lowe
@@ -21,29 +21,47 @@
 
 module XADCdemo(
    input CLK100MHZ,
+   input ck_rst,
    input [8:0] ck_an_p,
    input [8:0] ck_an_n,
    input vp_in,
    input vn_in,
    output [2:0] ck_io
-
  );
-   
-   assign ck_io[0] = CLK100MHZ;
-   
-   wire clk5MHz;
-   assign ck_io[1] = clk5MHz;
-   
-   clk_wiz_0 CLK_5MHz(
-    .clk_5MHz(clk5MHz),
-    .resetn(1),
+    localparam SCALE_FACTOR = 1024;   
+    
+    localparam DIVIDER_WIDTH = 13;
+    
+    localparam CLK_OUT_PIN = 0;
+    localparam SLO_CLK_OUT_PIN = 1;
+    localparam SIGNAL_OUT_PIN = 2;
+    
+    reg [0:0] outputReg = 1'b0;
+    reg [DIVIDER_WIDTH-1:0] divider = {DIVIDER_WIDTH{1'b0}};
+    
+    reg [15:0] highDuration = 16'b0;
+    reg [15:0] lowDuration = 16'b0;
+    reg [15:0] counter = 16'b0;     
+
+    reg [0:0] bad_address = 1'b0;  
+    reg [6:0] Address_in;     
+
+    reg _ready = 0;
+
+    wire clk8192KHz;
+
+    wire enable;
+    wire ready;
+    wire [15:0] data;   
+
+    assign ck_io[CLK_OUT_PIN] = clk8192KHz;
+    assign ck_io[SLO_CLK_OUT_PIN] = divider[DIVIDER_WIDTH-1];
+    assign ck_io[SIGNAL_OUT_PIN] = outputReg[0];
+
+   clk_wiz_0 CLK_8192KHz(
+    .clk_8192KHz(clk8192KHz),
+    .resetn(ck_rst),
     .sys_clk_in(CLK100MHZ));
-   
-   wire enable;
-   reg bad_address = 0;  
-   wire ready;
-   wire [15:0] data;   
-   reg [6:0] Address_in;     
 
    //xadc instantiation connect the eoc_out .den_in to get continuous conversion
 
@@ -51,7 +69,7 @@ module XADCdemo(
         (
         .daddr_in(Address_in),            // Address bus for the dynamic reconfiguration port
         .dclk_in(CLK100MHZ),             // Clock input for the dynamic reconfiguration port
-        .den_in(enable & ~bad_address),              // Enable Signal for the dynamic reconfiguration port
+        .den_in(enable & ~bad_address[0]),              // Enable Signal for the dynamic reconfiguration port
         .di_in(0),               // Input data bus for the dynamic reconfiguration port
         .dwe_in(0),              // Write Enable for the dynamic reconfiguration port
         .reset_in(0),            // Reset signal for the System Monitor control logic
@@ -85,38 +103,48 @@ module XADCdemo(
         .vauxn14(ck_an_n[8])
     );
 
-    reg _ready = 0;
-    always@(posedge CLK100MHZ) _ready <= ready;
-
-
-    always @(posedge CLK100MHZ) begin            
-        casex({outputHigh, ready, _ready})
+    always @(posedge CLK100MHZ) 
+    begin            
+        _ready <= ready;
+        casex({outputReg[0], ready, _ready})
             3'b101: Address_in <= 8'h14;
             3'b001: Address_in <= 8'h15;
             3'b11x: highDuration <= data;
             3'b01x: lowDuration <= data;
+            default: ;
         endcase
     end
+     
+    always @(posedge clk8192KHz) divider = divider + 1'b1; 
     
-    
-    reg [15:0] highDuration = 0;
-    reg [15:0] lowDuration = 0;
-    reg [15:0] counter = 0;     
-
-    reg outputHigh = 0;
-    assign ck_io[2] = outputHigh;
-
-    always @(posedge clk5MHz) begin            
-        counter <= counter + 1;
-        casex({outputHigh, counter >= highDuration, counter >= lowDuration})
+    always @(negedge clk8192KHz) 
+    begin
+        if(divider[DIVIDER_WIDTH-1])
+        begin 
+            if(outputReg[0] && counter >= highDuration) 
+            begin
+                counter = 16'b0;
+                outputReg[0] = 1'b0;
+            end 
+            else if(!outputReg[0] && counter >= lowDuration) 
+            begin 
+                counter = 16'b0;
+                outputReg[0] = 1'b1;
+            end 
+            else counter = counter + 1'b1;
+        end
+/**
+        counter <= counter + 1;  
+        casex({outputReg[0], counter >= highDuration, counter >= lowDuration})
             3'b11x: begin
-                counter <= 0;
-                outputHigh <= 0;
+                outputReg[0] = 1'b0;
+                counter <= 16'b0;
             end
             3'b0x1: begin
-                counter <= 0;
-                outputHigh <= 1;
+                outputReg[0] = 1'b1;
+                counter <= 16'b0;
             end
         endcase
+**/
     end
 endmodule

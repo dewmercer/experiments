@@ -1,7 +1,7 @@
 // Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2019.2.1 (lin64) Build 2729669 Thu Dec  5 04:48:12 MST 2019
-// Date        : Mon Jan 20 23:39:25 2020
+// Date        : Sat Jan 25 12:40:33 2020
 // Host        : home-debian-1 running 64-bit Debian GNU/Linux 10 (buster)
 // Command     : write_verilog -force -mode funcsim
 //               /home/dmercer/src/experiments/vivado/Arty_A7-35T_XADC_Demo/vivado_proj/Arty-A7-35-XADC.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0_sim_netlist.v
@@ -14,34 +14,34 @@
 
 (* NotValidForBitStream *)
 module clk_wiz_0
-   (clk_5MHz,
+   (clk_8192KHz,
     resetn,
     sys_clk_in);
-  output clk_5MHz;
+  output clk_8192KHz;
   input resetn;
   input sys_clk_in;
 
-  wire clk_5MHz;
+  wire clk_8192KHz;
   wire resetn;
   (* IBUF_LOW_PWR *) wire sys_clk_in;
 
   clk_wiz_0_clk_wiz_0_clk_wiz inst
-       (.clk_5MHz(clk_5MHz),
+       (.clk_8192KHz(clk_8192KHz),
         .resetn(resetn),
         .sys_clk_in(sys_clk_in));
 endmodule
 
 (* ORIG_REF_NAME = "clk_wiz_0_clk_wiz" *) 
 module clk_wiz_0_clk_wiz_0_clk_wiz
-   (clk_5MHz,
+   (clk_8192KHz,
     resetn,
     sys_clk_in);
-  output clk_5MHz;
+  output clk_8192KHz;
   input resetn;
   input sys_clk_in;
 
-  wire clk_5MHz;
-  wire clk_5MHz_clk_wiz_0;
+  wire clk_8192KHz;
+  wire clk_8192KHz_clk_wiz_0;
   wire clkfbout_clk_wiz_0;
   wire reset_high;
   wire resetn;
@@ -76,17 +76,17 @@ module clk_wiz_0_clk_wiz_0_clk_wiz
         .O(sys_clk_in_clk_wiz_0));
   (* BOX_TYPE = "PRIMITIVE" *) 
   BUFG clkout1_buf
-       (.I(clk_5MHz_clk_wiz_0),
-        .O(clk_5MHz));
+       (.I(clk_8192KHz_clk_wiz_0),
+        .O(clk_8192KHz));
   (* BOX_TYPE = "PRIMITIVE" *) 
   MMCME2_ADV #(
     .BANDWIDTH("OPTIMIZED"),
-    .CLKFBOUT_MULT_F(32.000000),
+    .CLKFBOUT_MULT_F(60.375000),
     .CLKFBOUT_PHASE(0.000000),
     .CLKFBOUT_USE_FINE_PS("FALSE"),
     .CLKIN1_PERIOD(10.000000),
     .CLKIN2_PERIOD(0.000000),
-    .CLKOUT0_DIVIDE_F(128.000000),
+    .CLKOUT0_DIVIDE_F(92.125000),
     .CLKOUT0_DUTY_CYCLE(0.500000),
     .CLKOUT0_PHASE(0.000000),
     .CLKOUT0_USE_FINE_PS("FALSE"),
@@ -116,7 +116,7 @@ module clk_wiz_0_clk_wiz_0_clk_wiz
     .CLKOUT6_PHASE(0.000000),
     .CLKOUT6_USE_FINE_PS("FALSE"),
     .COMPENSATION("INTERNAL"),
-    .DIVCLK_DIVIDE(5),
+    .DIVCLK_DIVIDE(8),
     .IS_CLKINSEL_INVERTED(1'b0),
     .IS_PSEN_INVERTED(1'b0),
     .IS_PSINCDEC_INVERTED(1'b0),
@@ -137,7 +137,7 @@ module clk_wiz_0_clk_wiz_0_clk_wiz
         .CLKIN2(1'b0),
         .CLKINSEL(1'b1),
         .CLKINSTOPPED(NLW_mmcm_adv_inst_CLKINSTOPPED_UNCONNECTED),
-        .CLKOUT0(clk_5MHz_clk_wiz_0),
+        .CLKOUT0(clk_8192KHz_clk_wiz_0),
         .CLKOUT0B(NLW_mmcm_adv_inst_CLKOUT0B_UNCONNECTED),
         .CLKOUT1(NLW_mmcm_adv_inst_CLKOUT1_UNCONNECTED),
         .CLKOUT1B(NLW_mmcm_adv_inst_CLKOUT1B_UNCONNECTED),

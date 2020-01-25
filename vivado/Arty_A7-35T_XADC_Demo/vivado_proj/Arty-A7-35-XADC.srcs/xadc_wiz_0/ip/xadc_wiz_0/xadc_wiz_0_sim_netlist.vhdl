@@ -1,7 +1,7 @@
 -- Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2019.2.1 (lin64) Build 2729669 Thu Dec  5 04:48:12 MST 2019
--- Date        : Mon Jan 20 17:18:03 2020
+-- Date        : Fri Jan 24 17:00:20 2020
 -- Host        : home-debian-1 running 64-bit Debian GNU/Linux 10 (buster)
 -- Command     : write_vhdl -force -mode funcsim
 --               /home/dmercer/src/experiments/vivado/Arty_A7-35T_XADC_Demo/vivado_proj/Arty-A7-35-XADC.srcs/xadc_wiz_0/ip/xadc_wiz_0/xadc_wiz_0_sim_netlist.vhdl
@@ -46,8 +46,6 @@ entity xadc_wiz_0 is
     drdy_out : out STD_LOGIC;
     eoc_out : out STD_LOGIC;
     eos_out : out STD_LOGIC;
-    vccaux_alarm_out : out STD_LOGIC;
-    vccint_alarm_out : out STD_LOGIC;
     alarm_out : out STD_LOGIC;
     vp_in : in STD_LOGIC;
     vn_in : in STD_LOGIC
@@ -69,7 +67,7 @@ begin
 inst: unisim.vcomponents.XADC
     generic map(
       INIT_40 => X"0000",
-      INIT_41 => X"21A3",
+      INIT_41 => X"21AF",
       INIT_42 => X"0400",
       INIT_43 => X"0000",
       INIT_44 => X"0000",
@@ -107,10 +105,7 @@ inst: unisim.vcomponents.XADC
     )
         port map (
       ALM(7) => alarm_out,
-      ALM(6 downto 3) => NLW_inst_ALM_UNCONNECTED(6 downto 3),
-      ALM(2) => vccaux_alarm_out,
-      ALM(1) => vccint_alarm_out,
-      ALM(0) => NLW_inst_ALM_UNCONNECTED(0),
+      ALM(6 downto 0) => NLW_inst_ALM_UNCONNECTED(6 downto 0),
       BUSY => busy_out,
       CHANNEL(4 downto 0) => channel_out(4 downto 0),
       CONVST => '0',

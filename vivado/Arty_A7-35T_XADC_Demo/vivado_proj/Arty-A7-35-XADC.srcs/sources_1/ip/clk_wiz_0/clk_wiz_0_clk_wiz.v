@@ -56,7 +56,7 @@
 //  Output     Output      Phase    Duty Cycle   Pk-to-Pk     Phase
 //   Clock     Freq (MHz)  (degrees)    (%)     Jitter (ps)  Error (ps)
 //----------------------------------------------------------------------------
-// clk_5MHz___5.00000______0.000______50.0______631.442____346.848
+// clk_8192KHz___8.19199______0.000______50.0______624.765____617.891
 //
 //----------------------------------------------------------------------------
 // Input Clock   Freq (MHz)    Input Jitter (UI)
@@ -69,7 +69,7 @@ module clk_wiz_0_clk_wiz
 
  (// Clock in ports
   // Clock out ports
-  output        clk_5MHz,
+  output        clk_8192KHz,
   // Status and control signals
   input         resetn,
   input         sys_clk_in
@@ -92,7 +92,7 @@ wire clk_in2_clk_wiz_0;
   //    * Unused inputs are tied off
   //    * Unused outputs are labeled unused
 
-  wire        clk_5MHz_clk_wiz_0;
+  wire        clk_8192KHz_clk_wiz_0;
   wire        clk_out2_clk_wiz_0;
   wire        clk_out3_clk_wiz_0;
   wire        clk_out4_clk_wiz_0;
@@ -125,11 +125,11 @@ wire clk_in2_clk_wiz_0;
     .CLKOUT4_CASCADE      ("FALSE"),
     .COMPENSATION         ("ZHOLD"),
     .STARTUP_WAIT         ("FALSE"),
-    .DIVCLK_DIVIDE        (5),
-    .CLKFBOUT_MULT_F      (32.000),
+    .DIVCLK_DIVIDE        (8),
+    .CLKFBOUT_MULT_F      (60.375),
     .CLKFBOUT_PHASE       (0.000),
     .CLKFBOUT_USE_FINE_PS ("FALSE"),
-    .CLKOUT0_DIVIDE_F     (128.000),
+    .CLKOUT0_DIVIDE_F     (92.125),
     .CLKOUT0_PHASE        (0.000),
     .CLKOUT0_DUTY_CYCLE   (0.500),
     .CLKOUT0_USE_FINE_PS  ("FALSE"),
@@ -139,7 +139,7 @@ wire clk_in2_clk_wiz_0;
    (
     .CLKFBOUT            (clkfbout_clk_wiz_0),
     .CLKFBOUTB           (clkfboutb_unused),
-    .CLKOUT0             (clk_5MHz_clk_wiz_0),
+    .CLKOUT0             (clk_8192KHz_clk_wiz_0),
     .CLKOUT0B            (clkout0b_unused),
     .CLKOUT1             (clkout1_unused),
     .CLKOUT1B            (clkout1b_unused),
@@ -188,8 +188,8 @@ wire clk_in2_clk_wiz_0;
 
 
   BUFG clkout1_buf
-   (.O   (clk_5MHz),
-    .I   (clk_5MHz_clk_wiz_0));
+   (.O   (clk_8192KHz),
+    .I   (clk_8192KHz_clk_wiz_0));
 
 
 

@@ -47,7 +47,7 @@
 // PART OF THIS FILE AT ALL TIMES.
 `timescale 1ns / 1 ps
 
-(* CORE_GENERATION_INFO = "xadc_wiz_0,xadc_wiz_v3_3_7,{component_name=xadc_wiz_0,enable_axi=false,enable_axi4stream=false,dclk_frequency=100,enable_busy=true,enable_convst=false,enable_convstclk=false,enable_dclk=true,enable_drp=true,enable_eoc=true,enable_eos=true,enable_vbram_alaram=false,enable_vccddro_alaram=false,enable_Vccint_Alaram=true,enable_Vccaux_alaram=true,enable_vccpaux_alaram=false,enable_vccpint_alaram=false,ot_alaram=false,user_temp_alaram=false,timing_mode=continuous,channel_averaging=None,sequencer_mode=on,startup_channel_selection=contineous_sequence}" *)
+(* CORE_GENERATION_INFO = "xadc_wiz_0,xadc_wiz_v3_3_7,{component_name=xadc_wiz_0,enable_axi=false,enable_axi4stream=false,dclk_frequency=100,enable_busy=true,enable_convst=false,enable_convstclk=false,enable_dclk=true,enable_drp=true,enable_eoc=true,enable_eos=true,enable_vbram_alaram=false,enable_vccddro_alaram=false,enable_Vccint_Alaram=false,enable_Vccaux_alaram=false,enable_vccpaux_alaram=false,enable_vccpint_alaram=false,ot_alaram=false,user_temp_alaram=false,timing_mode=continuous,channel_averaging=None,sequencer_mode=on,startup_channel_selection=contineous_sequence}" *)
 
 
 module xadc_wiz_0
@@ -82,8 +82,6 @@ module xadc_wiz_0
           drdy_out,            // Data ready signal for the dynamic reconfiguration port
           eoc_out,             // End of Conversion Signal
           eos_out,             // End of Sequence Signal
-          vccaux_alarm_out,    // VCCAUX-sensor alarm output
-          vccint_alarm_out,    //  VCCINT-sensor alarm output
           alarm_out,           // OR'ed output of all the Alarms    
           vp_in,               // Dedicated Analog Input Pair
           vn_in);
@@ -121,19 +119,19 @@ module xadc_wiz_0
           output drdy_out;
           output eoc_out;
           output eos_out;
-          output vccaux_alarm_out;
-          output vccint_alarm_out;
           output alarm_out;
 
+        wire FLOAT_VCCAUX;
+        wire FLOAT_VCCINT;
         wire FLOAT_TEMP;
           wire GND_BIT;
+    wire [2:0] GND_BUS3;
           assign GND_BIT = 0;
+    assign GND_BUS3 = 3'b000;
           wire [15:0] aux_channel_p;
           wire [15:0] aux_channel_n;
           wire [7:0]  alm_int;
           assign alarm_out = alm_int[7];
-          assign vccaux_alarm_out = alm_int[2];
-          assign vccint_alarm_out = alm_int[1];
           assign aux_channel_p[0] = vauxp0;
           assign aux_channel_n[0] = vauxn0;
 
@@ -183,7 +181,7 @@ module xadc_wiz_0
           assign aux_channel_n[15] = vauxn15;
 XADC #(
         .INIT_40(16'h0000), // config reg 0
-        .INIT_41(16'h21A3), // config reg 1
+        .INIT_41(16'h21AF), // config reg 1
         .INIT_42(16'h0400), // config reg 2
         .INIT_48(16'h0800), // Sequencer channel selection
         .INIT_49(16'hF0F1), // Sequencer channel selection

@@ -1,7 +1,7 @@
 // Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2019.2.1 (lin64) Build 2729669 Thu Dec  5 04:48:12 MST 2019
-// Date        : Mon Jan 20 17:18:03 2020
+// Date        : Fri Jan 24 17:00:20 2020
 // Host        : home-debian-1 running 64-bit Debian GNU/Linux 10 (buster)
 // Command     : write_verilog -force -mode funcsim
 //               /home/dmercer/src/experiments/vivado/Arty_A7-35T_XADC_Demo/vivado_proj/Arty-A7-35-XADC.srcs/xadc_wiz_0/ip/xadc_wiz_0/xadc_wiz_0_sim_netlist.v
@@ -44,8 +44,6 @@ module xadc_wiz_0
     drdy_out,
     eoc_out,
     eos_out,
-    vccaux_alarm_out,
-    vccint_alarm_out,
     alarm_out,
     vp_in,
     vn_in);
@@ -79,8 +77,6 @@ module xadc_wiz_0
   output drdy_out;
   output eoc_out;
   output eos_out;
-  output vccaux_alarm_out;
-  output vccint_alarm_out;
   output alarm_out;
   input vp_in;
   input vn_in;
@@ -116,8 +112,6 @@ module xadc_wiz_0
   wire vauxp5;
   wire vauxp6;
   wire vauxp7;
-  wire vccaux_alarm_out;
-  wire vccint_alarm_out;
   wire vn_in;
   wire vp_in;
   wire NLW_inst_JTAGBUSY_UNCONNECTED;
@@ -130,7 +124,7 @@ module xadc_wiz_0
   (* BOX_TYPE = "PRIMITIVE" *) 
   XADC #(
     .INIT_40(16'h0000),
-    .INIT_41(16'h21A3),
+    .INIT_41(16'h21AF),
     .INIT_42(16'h0400),
     .INIT_43(16'h0000),
     .INIT_44(16'h0000),
@@ -166,7 +160,7 @@ module xadc_wiz_0
     .SIM_DEVICE("7SERIES"),
     .SIM_MONITOR_FILE("design.txt")) 
     inst
-       (.ALM({alarm_out,NLW_inst_ALM_UNCONNECTED[6:3],vccaux_alarm_out,vccint_alarm_out,NLW_inst_ALM_UNCONNECTED[0]}),
+       (.ALM({alarm_out,NLW_inst_ALM_UNCONNECTED[6:0]}),
         .BUSY(busy_out),
         .CHANNEL(channel_out),
         .CONVST(1'b0),

@@ -1,0 +1,7 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  --include "../../../../../Arty-A7-35-XADC.srcs/sources_1/ip/clk_wiz_0" \
+"SimMain_func_impl.v" \
+"../../../../../Arty-A7-35-XADC.srcs/sim_1/new/SimMain.v" \
+
+# Do not sort compile order
+nosort

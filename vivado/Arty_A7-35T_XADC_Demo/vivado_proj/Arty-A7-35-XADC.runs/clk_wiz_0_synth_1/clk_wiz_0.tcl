@@ -18,9 +18,9 @@ proc create_report { reportName command } {
   }
 }
 set_param chipscope.maxJobs 2
-set_param tcl.collectionResultDisplayLimit 0
 set_param xicom.use_bs_reader 1
 set_param ced.repoPaths {/home/dmercer/.Xilinx/Vivado/2019.2/xhub/ced_store /opt/Xilinx/Vivado/2019.2/examples}
+set_msg_config -id {Common 17-41} -limit 10000000
 set_param project.vivado.isBlockSynthRun true
 set_msg_config -msgmgr_mode ooc_run
 create_project -in_memory -part xc7a35ticsg324-1L
@@ -31,12 +31,11 @@ set_param synth.vivado.isSynthRun true
 set_msg_config -source 4 -id {IP_Flow 19-2162} -severity warning -new_severity info
 set_property webtalk.parent_dir /home/dmercer/src/experiments/vivado/Arty_A7-35T_XADC_Demo/vivado_proj/Arty-A7-35-XADC.cache/wt [current_project]
 set_property parent.project_path /home/dmercer/src/experiments/vivado/Arty_A7-35T_XADC_Demo/vivado_proj/Arty-A7-35-XADC.xpr [current_project]
+set_property XPM_LIBRARIES XPM_CDC [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language Verilog [current_project]
 set_property board_part_repo_paths {/home/dmercer/src/experiments/vivado/Arty_A7-35T_XADC_Demo/vivado_proj/Arty-A7-35-XADC.board} [current_project]
 set_property board_part digilentinc.com:arty-a7-35:part0:1.0 [current_project]
-set_property ip_repo_paths /home/dmercer/src/repo [current_project]
-update_ip_catalog
 set_property ip_output_repo /home/dmercer/src/experiments/vivado/Arty_A7-35T_XADC_Demo/vivado_proj/Arty-A7-35-XADC.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
 read_ip -quiet /home/dmercer/src/experiments/vivado/Arty_A7-35T_XADC_Demo/vivado_proj/Arty-A7-35-XADC.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0.xci

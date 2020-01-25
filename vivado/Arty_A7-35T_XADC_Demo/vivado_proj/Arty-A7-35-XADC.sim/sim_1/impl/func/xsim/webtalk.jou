@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Webtalk v2019.2.1 (64-bit)
+# SW Build 2729669 on Thu Dec  5 04:48:12 MST 2019
+# IP Build 2729494 on Thu Dec  5 07:38:25 MST 2019
+# Start of session at: Sat Jan 25 01:43:16 2020
+# Process ID: 24411
+# Current directory: /home/dmercer/src/experiments/vivado/Arty_A7-35T_XADC_Demo/vivado_proj/Arty-A7-35-XADC.sim/sim_1/impl/func/xsim
+# Command line: wbtcv -mode batch -source /home/dmercer/src/experiments/vivado/Arty_A7-35T_XADC_Demo/vivado_proj/Arty-A7-35-XADC.sim/sim_1/impl/func/xsim/xsim.dir/SimMain_func_impl/webtalk/xsim_webtalk.tcl -notrace
+# Log file: /home/dmercer/src/experiments/vivado/Arty_A7-35T_XADC_Demo/vivado_proj/Arty-A7-35-XADC.sim/sim_1/impl/func/xsim/webtalk.log
+# Journal file: /home/dmercer/src/experiments/vivado/Arty_A7-35T_XADC_Demo/vivado_proj/Arty-A7-35-XADC.sim/sim_1/impl/func/xsim/webtalk.jou
+#-----------------------------------------------------------
+source /home/dmercer/src/experiments/vivado/Arty_A7-35T_XADC_Demo/vivado_proj/Arty-A7-35-XADC.sim/sim_1/impl/func/xsim/xsim.dir/SimMain_func_impl/webtalk/xsim_webtalk.tcl -notrace
