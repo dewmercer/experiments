@@ -2,8 +2,8 @@
 # Vivado v2019.2.1 (64-bit)
 # SW Build 2729669 on Thu Dec  5 04:48:12 MST 2019
 # IP Build 2729494 on Thu Dec  5 07:38:25 MST 2019
-# Start of session at: Sat Jan 25 12:47:36 2020
-# Process ID: 5271
+# Start of session at: Sat Feb  1 14:18:41 2020
+# Process ID: 9067
 # Current directory: /home/dmercer/src/experiments/vivado/Arty_A7-35T_XADC_Demo/vivado_proj/Arty-A7-35-XADC.runs/synth_1
 # Command line: vivado -log XADCdemo.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source XADCdemo.tcl
 # Log file: /home/dmercer/src/experiments/vivado/Arty_A7-35T_XADC_Demo/vivado_proj/Arty-A7-35-XADC.runs/synth_1/XADCdemo.vds
@@ -16,23 +16,26 @@ Attempting to get a license for feature 'Synthesis' and/or device 'xc7a35ti'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35ti'
 INFO: [Device 21-403] Loading part xc7a35ticsg324-1L
 INFO: Launching helper process for spawning children vivado processes
-INFO: Helper process launched with PID 5393 
+INFO: Helper process launched with PID 9123 
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 1925.133 ; gain = 203.684 ; free physical = 15058 ; free virtual = 53873
+Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 1924.031 ; gain = 203.715 ; free physical = 22054 ; free virtual = 59048
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-6157] synthesizing module 'XADCdemo' [/home/dmercer/src/experiments/vivado/Arty_A7-35T_XADC_Demo/vivado_proj/Arty-A7-35-XADC.srcs/sources_1/imports/hdl/XADCdemo.v:22]
-	Parameter SCALE_FACTOR bound to: 1024 - type: integer 
-	Parameter DIVIDER_WIDTH bound to: 13 - type: integer 
+	Parameter DIVIDER_WIDTH bound to: 16 - type: integer 
 	Parameter CLK_OUT_PIN bound to: 0 - type: integer 
 	Parameter SLO_CLK_OUT_PIN bound to: 1 - type: integer 
 	Parameter SIGNAL_OUT_PIN bound to: 2 - type: integer 
-INFO: [Synth 8-6157] synthesizing module 'clk_wiz_0' [/home/dmercer/src/experiments/vivado/Arty_A7-35T_XADC_Demo/vivado_proj/Arty-A7-35-XADC.runs/synth_1/.Xil/Vivado-5271-home-debian-1/realtime/clk_wiz_0_stub.v:5]
-INFO: [Synth 8-6155] done synthesizing module 'clk_wiz_0' (1#1) [/home/dmercer/src/experiments/vivado/Arty_A7-35T_XADC_Demo/vivado_proj/Arty-A7-35-XADC.runs/synth_1/.Xil/Vivado-5271-home-debian-1/realtime/clk_wiz_0_stub.v:5]
-INFO: [Synth 8-6157] synthesizing module 'xadc_wiz_0' [/home/dmercer/src/experiments/vivado/Arty_A7-35T_XADC_Demo/vivado_proj/Arty-A7-35-XADC.runs/synth_1/.Xil/Vivado-5271-home-debian-1/realtime/xadc_wiz_0_stub.v:5]
-INFO: [Synth 8-6155] done synthesizing module 'xadc_wiz_0' (2#1) [/home/dmercer/src/experiments/vivado/Arty_A7-35T_XADC_Demo/vivado_proj/Arty-A7-35-XADC.runs/synth_1/.Xil/Vivado-5271-home-debian-1/realtime/xadc_wiz_0_stub.v:5]
-INFO: [Synth 8-6155] done synthesizing module 'XADCdemo' (3#1) [/home/dmercer/src/experiments/vivado/Arty_A7-35T_XADC_Demo/vivado_proj/Arty-A7-35-XADC.srcs/sources_1/imports/hdl/XADCdemo.v:22]
+	Parameter ADC_BUS_WIDTH bound to: 16 - type: integer 
+	Parameter ADC_BITS bound to: 12 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'xadc_wiz_0' [/home/dmercer/src/experiments/vivado/Arty_A7-35T_XADC_Demo/vivado_proj/Arty-A7-35-XADC.runs/synth_1/.Xil/Vivado-9067-home-debian-1/realtime/xadc_wiz_0_stub.v:5]
+INFO: [Synth 8-6155] done synthesizing module 'xadc_wiz_0' (1#1) [/home/dmercer/src/experiments/vivado/Arty_A7-35T_XADC_Demo/vivado_proj/Arty-A7-35-XADC.runs/synth_1/.Xil/Vivado-9067-home-debian-1/realtime/xadc_wiz_0_stub.v:5]
+WARNING: [Synth 8-6090] variable 'dividerReg' is written by both blocking and non-blocking assignments, entire logic could be removed [/home/dmercer/src/experiments/vivado/Arty_A7-35T_XADC_Demo/vivado_proj/Arty-A7-35-XADC.srcs/sources_1/imports/hdl/XADCdemo.v:121]
+INFO: [Synth 8-6155] done synthesizing module 'XADCdemo' (2#1) [/home/dmercer/src/experiments/vivado/Arty_A7-35T_XADC_Demo/vivado_proj/Arty-A7-35-XADC.srcs/sources_1/imports/hdl/XADCdemo.v:22]
+WARNING: [Synth 8-3331] design XADCdemo has unconnected port ck_rst
+WARNING: [Synth 8-3331] design XADCdemo has unconnected port vp_in
+WARNING: [Synth 8-3331] design XADCdemo has unconnected port vn_in
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:06 . Memory (MB): peak = 1987.883 ; gain = 266.434 ; free physical = 15068 ; free virtual = 53884
+Finished RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 1985.781 ; gain = 265.465 ; free physical = 22077 ; free virtual = 59071
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -45,53 +48,48 @@ Report Check Netlist:
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 1993.820 ; gain = 272.371 ; free physical = 15064 ; free virtual = 53879
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 1988.750 ; gain = 268.434 ; free physical = 22071 ; free virtual = 59066
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 1993.820 ; gain = 272.371 ; free physical = 15064 ; free virtual = 53879
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 1988.750 ; gain = 268.434 ; free physical = 22071 ; free virtual = 59066
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1993.820 ; gain = 0.000 ; free physical = 15058 ; free virtual = 53873
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1988.750 ; gain = 0.000 ; free physical = 22065 ; free virtual = 59060
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
 Initializing timing engine
 Parsing XDC File [/home/dmercer/src/experiments/vivado/Arty_A7-35T_XADC_Demo/vivado_proj/Arty-A7-35-XADC.srcs/xadc_wiz_0/ip/xadc_wiz_0/xadc_wiz_0/xadc_wiz_0_in_context.xdc] for cell 'xadc'
 Finished Parsing XDC File [/home/dmercer/src/experiments/vivado/Arty_A7-35T_XADC_Demo/vivado_proj/Arty-A7-35-XADC.srcs/xadc_wiz_0/ip/xadc_wiz_0/xadc_wiz_0/xadc_wiz_0_in_context.xdc] for cell 'xadc'
-Parsing XDC File [/home/dmercer/src/experiments/vivado/Arty_A7-35T_XADC_Demo/vivado_proj/Arty-A7-35-XADC.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0/clk_wiz_0_in_context.xdc] for cell 'CLK_8192KHz'
-Finished Parsing XDC File [/home/dmercer/src/experiments/vivado/Arty_A7-35T_XADC_Demo/vivado_proj/Arty-A7-35-XADC.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0/clk_wiz_0_in_context.xdc] for cell 'CLK_8192KHz'
 Parsing XDC File [/home/dmercer/src/experiments/vivado/Arty_A7-35T_XADC_Demo/vivado_proj/Arty-A7-35-XADC.srcs/constrs_1/imports/constraints/Arty_Master.xdc]
 Finished Parsing XDC File [/home/dmercer/src/experiments/vivado/Arty_A7-35T_XADC_Demo/vivado_proj/Arty-A7-35-XADC.srcs/constrs_1/imports/constraints/Arty_Master.xdc]
 INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [/home/dmercer/src/experiments/vivado/Arty_A7-35T_XADC_Demo/vivado_proj/Arty-A7-35-XADC.srcs/constrs_1/imports/constraints/Arty_Master.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/XADCdemo_propImpl.xdc].
 Resolution: To avoid this warning, move constraints listed in [.Xil/XADCdemo_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2142.664 ; gain = 0.000 ; free physical = 14937 ; free virtual = 53752
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2133.531 ; gain = 0.000 ; free physical = 21916 ; free virtual = 58922
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2142.664 ; gain = 0.000 ; free physical = 14937 ; free virtual = 53752
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2133.531 ; gain = 0.000 ; free physical = 21916 ; free virtual = 58922
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:10 ; elapsed = 00:00:13 . Memory (MB): peak = 2142.664 ; gain = 421.215 ; free physical = 15033 ; free virtual = 53849
+Finished Constraint Validation : Time (s): cpu = 00:00:10 ; elapsed = 00:00:12 . Memory (MB): peak = 2133.531 ; gain = 413.215 ; free physical = 22044 ; free virtual = 59039
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a35ticsg324-1L
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:10 ; elapsed = 00:00:13 . Memory (MB): peak = 2142.664 ; gain = 421.215 ; free physical = 15033 ; free virtual = 53849
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:10 ; elapsed = 00:00:12 . Memory (MB): peak = 2133.531 ; gain = 413.215 ; free physical = 22044 ; free virtual = 59039
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
-Applied set_property IO_BUFFER_TYPE = NONE for CLK100MHZ. (constraint file  /home/dmercer/src/experiments/vivado/Arty_A7-35T_XADC_Demo/vivado_proj/Arty-A7-35-XADC.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0/clk_wiz_0_in_context.xdc, line 3).
-Applied set_property CLOCK_BUFFER_TYPE = NONE for CLK100MHZ. (constraint file  /home/dmercer/src/experiments/vivado/Arty_A7-35T_XADC_Demo/vivado_proj/Arty-A7-35-XADC.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0/clk_wiz_0_in_context.xdc, line 4).
 Applied set_property DONT_TOUCH = true for xadc. (constraint file  auto generated constraint, line ).
-Applied set_property DONT_TOUCH = true for CLK_8192KHz. (constraint file  auto generated constraint, line ).
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:10 ; elapsed = 00:00:13 . Memory (MB): peak = 2142.664 ; gain = 421.215 ; free physical = 15036 ; free virtual = 53851
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:10 ; elapsed = 00:00:12 . Memory (MB): peak = 2133.531 ; gain = 413.215 ; free physical = 22044 ; free virtual = 59039
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:10 ; elapsed = 00:00:13 . Memory (MB): peak = 2142.664 ; gain = 421.215 ; free physical = 15027 ; free virtual = 53843
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:10 ; elapsed = 00:00:12 . Memory (MB): peak = 2133.531 ; gain = 413.215 ; free physical = 22037 ; free virtual = 59033
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -104,7 +102,7 @@ Start RTL Component Statistics
 ---------------------------------------------------------------------------------
 Detailed RTL Component Info : 
 +---Registers : 
-	               16 Bit    Registers := 2     
+	               12 Bit    Registers := 2     
 	                7 Bit    Registers := 1     
 	                1 Bit    Registers := 2     
 +---Muxes : 
@@ -121,7 +119,7 @@ Hierarchical RTL Component report
 Module XADCdemo 
 Detailed RTL Component Info : 
 +---Registers : 
-	               16 Bit    Registers := 2     
+	               12 Bit    Registers := 2     
 	                7 Bit    Registers := 1     
 	                1 Bit    Registers := 2     
 +---Muxes : 
@@ -151,7 +149,7 @@ INFO: [Synth 8-3333] propagating constant 1 across sequential element (\Address_
 INFO: [Synth 8-3886] merging instance 'Address_in_reg[5]' (FDE) to 'Address_in_reg[6]'
 INFO: [Synth 8-3333] propagating constant 0 across sequential element (\Address_in_reg[6] )
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:11 ; elapsed = 00:00:14 . Memory (MB): peak = 2142.664 ; gain = 421.215 ; free physical = 15013 ; free virtual = 53832
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:10 ; elapsed = 00:00:13 . Memory (MB): peak = 2133.531 ; gain = 413.215 ; free physical = 22023 ; free virtual = 59022
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -163,7 +161,7 @@ Report RTL Partitions:
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:16 ; elapsed = 00:00:20 . Memory (MB): peak = 2142.664 ; gain = 421.215 ; free physical = 14896 ; free virtual = 53715
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:16 ; elapsed = 00:00:20 . Memory (MB): peak = 2133.531 ; gain = 413.215 ; free physical = 21907 ; free virtual = 58905
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -175,7 +173,7 @@ Report RTL Partitions:
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:16 ; elapsed = 00:00:20 . Memory (MB): peak = 2142.664 ; gain = 421.215 ; free physical = 14894 ; free virtual = 53713
+Finished Technology Mapping : Time (s): cpu = 00:00:16 ; elapsed = 00:00:20 . Memory (MB): peak = 2133.531 ; gain = 413.215 ; free physical = 21905 ; free virtual = 58903
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -193,13 +191,13 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:20 ; elapsed = 00:00:24 . Memory (MB): peak = 2142.664 ; gain = 421.215 ; free physical = 14891 ; free virtual = 53710
+Finished IO Insertion : Time (s): cpu = 00:00:19 ; elapsed = 00:00:23 . Memory (MB): peak = 2133.531 ; gain = 413.215 ; free physical = 21896 ; free virtual = 58896
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:20 ; elapsed = 00:00:24 . Memory (MB): peak = 2142.664 ; gain = 421.215 ; free physical = 14891 ; free virtual = 53710
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:19 ; elapsed = 00:00:23 . Memory (MB): peak = 2133.531 ; gain = 413.215 ; free physical = 21896 ; free virtual = 58896
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -218,7 +216,7 @@ Report Check Netlist:
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:20 ; elapsed = 00:00:24 . Memory (MB): peak = 2142.664 ; gain = 421.215 ; free physical = 14891 ; free virtual = 53710
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:19 ; elapsed = 00:00:23 . Memory (MB): peak = 2133.531 ; gain = 413.215 ; free physical = 21896 ; free virtual = 58896
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -228,55 +226,54 @@ Report BlackBoxes:
 +------+--------------+----------+
 |      |BlackBox name |Instances |
 +------+--------------+----------+
-|1     |clk_wiz_0     |         1|
-|2     |xadc_wiz_0    |         1|
+|1     |xadc_wiz_0    |         1|
 +------+--------------+----------+
 
 Report Cell Usage: 
 +------+-----------+------+
 |      |Cell       |Count |
 +------+-----------+------+
-|1     |clk_wiz_0  |     1|
-|2     |xadc_wiz_0 |     1|
-|3     |CARRY4     |    12|
+|1     |xadc_wiz_0 |     1|
+|2     |BUFG       |     1|
+|3     |CARRY4     |     9|
 |4     |LUT1       |     2|
 |5     |LUT2       |     2|
-|6     |LUT4       |    35|
-|7     |FDRE       |    64|
-|8     |IBUF       |    21|
-|9     |OBUF       |     3|
+|6     |LUT4       |     3|
+|7     |LUT6       |     8|
+|8     |FDRE       |    55|
+|9     |IBUF       |     8|
+|10    |OBUF       |     2|
 +------+-----------+------+
 
 Report Instance Areas: 
 +------+---------+-------+------+
 |      |Instance |Module |Cells |
 +------+---------+-------+------+
-|1     |top      |       |   166|
+|1     |top      |       |   116|
 +------+---------+-------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:20 ; elapsed = 00:00:24 . Memory (MB): peak = 2142.664 ; gain = 421.215 ; free physical = 14891 ; free virtual = 53710
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:19 ; elapsed = 00:00:23 . Memory (MB): peak = 2133.531 ; gain = 413.215 ; free physical = 21896 ; free virtual = 58896
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:18 ; elapsed = 00:00:22 . Memory (MB): peak = 2142.664 ; gain = 272.371 ; free physical = 14942 ; free virtual = 53761
-Synthesis Optimization Complete : Time (s): cpu = 00:00:20 ; elapsed = 00:00:24 . Memory (MB): peak = 2142.664 ; gain = 421.215 ; free physical = 14942 ; free virtual = 53761
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:18 ; elapsed = 00:00:21 . Memory (MB): peak = 2133.531 ; gain = 268.434 ; free physical = 21939 ; free virtual = 58946
+Synthesis Optimization Complete : Time (s): cpu = 00:00:19 ; elapsed = 00:00:23 . Memory (MB): peak = 2133.531 ; gain = 413.215 ; free physical = 21939 ; free virtual = 58946
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2142.664 ; gain = 0.000 ; free physical = 15024 ; free virtual = 53843
-INFO: [Netlist 29-17] Analyzing 12 Unisim elements for replacement
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2133.531 ; gain = 0.000 ; free physical = 22009 ; free virtual = 59016
+INFO: [Netlist 29-17] Analyzing 9 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
-INFO: [Opt 31-140] Inserted 1 IBUFs to IO ports without IO buffers.
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2142.664 ; gain = 0.000 ; free physical = 14974 ; free virtual = 53793
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2133.531 ; gain = 0.000 ; free physical = 21967 ; free virtual = 58973
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
 INFO: [Common 17-83] Releasing license: Synthesis
-25 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+22 Infos, 4 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:26 ; elapsed = 00:00:39 . Memory (MB): peak = 2142.664 ; gain = 648.383 ; free physical = 15108 ; free virtual = 53927
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2142.664 ; gain = 0.000 ; free physical = 15109 ; free virtual = 53928
+synth_design: Time (s): cpu = 00:00:26 ; elapsed = 00:00:38 . Memory (MB): peak = 2133.531 ; gain = 638.320 ; free physical = 22101 ; free virtual = 59106
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2133.531 ; gain = 0.000 ; free physical = 22101 ; free virtual = 59106
 WARNING: [Constraints 18-5210] No constraints selected for write.
 Resolution: This message can indicate that there are no constraints for the design, or it can indicate that the used_in flags are set such that the constraints are ignored. This later case is used when running synth_design to not write synthesis constraints to the resulting checkpoint. Instead, project constraints are read when the synthesized design is opened.
 INFO: [Common 17-1381] The checkpoint '/home/dmercer/src/experiments/vivado/Arty_A7-35T_XADC_Demo/vivado_proj/Arty-A7-35-XADC.runs/synth_1/XADCdemo.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file XADCdemo_utilization_synth.rpt -pb XADCdemo_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Sat Jan 25 12:48:25 2020...
+INFO: [Common 17-206] Exiting Vivado at Sat Feb  1 14:19:28 2020...

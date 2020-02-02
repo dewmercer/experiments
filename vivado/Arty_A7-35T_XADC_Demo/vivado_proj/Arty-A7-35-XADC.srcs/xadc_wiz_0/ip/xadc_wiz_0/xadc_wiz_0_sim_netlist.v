@@ -1,7 +1,7 @@
 // Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2019.2.1 (lin64) Build 2729669 Thu Dec  5 04:48:12 MST 2019
-// Date        : Fri Jan 24 17:00:20 2020
+// Date        : Sat Jan 25 13:49:07 2020
 // Host        : home-debian-1 running 64-bit Debian GNU/Linux 10 (buster)
 // Command     : write_verilog -force -mode funcsim
 //               /home/dmercer/src/experiments/vivado/Arty_A7-35T_XADC_Demo/vivado_proj/Arty-A7-35-XADC.srcs/xadc_wiz_0/ip/xadc_wiz_0/xadc_wiz_0_sim_netlist.v
@@ -20,24 +20,12 @@ module xadc_wiz_0
     di_in,
     dwe_in,
     reset_in,
-    vauxp0,
-    vauxn0,
     vauxp4,
     vauxn4,
     vauxp5,
     vauxn5,
     vauxp6,
     vauxn6,
-    vauxp7,
-    vauxn7,
-    vauxp12,
-    vauxn12,
-    vauxp13,
-    vauxn13,
-    vauxp14,
-    vauxn14,
-    vauxp15,
-    vauxn15,
     busy_out,
     channel_out,
     do_out,
@@ -53,24 +41,12 @@ module xadc_wiz_0
   input [15:0]di_in;
   input dwe_in;
   input reset_in;
-  input vauxp0;
-  input vauxn0;
   input vauxp4;
   input vauxn4;
   input vauxp5;
   input vauxn5;
   input vauxp6;
   input vauxn6;
-  input vauxp7;
-  input vauxn7;
-  input vauxp12;
-  input vauxn12;
-  input vauxp13;
-  input vauxn13;
-  input vauxp14;
-  input vauxn14;
-  input vauxp15;
-  input vauxn15;
   output busy_out;
   output [4:0]channel_out;
   output [15:0]do_out;
@@ -94,24 +70,12 @@ module xadc_wiz_0
   wire eoc_out;
   wire eos_out;
   wire reset_in;
-  wire vauxn0;
-  wire vauxn12;
-  wire vauxn13;
-  wire vauxn14;
-  wire vauxn15;
   wire vauxn4;
   wire vauxn5;
   wire vauxn6;
-  wire vauxn7;
-  wire vauxp0;
-  wire vauxp12;
-  wire vauxp13;
-  wire vauxp14;
-  wire vauxp15;
   wire vauxp4;
   wire vauxp5;
   wire vauxp6;
-  wire vauxp7;
   wire vn_in;
   wire vp_in;
   wire NLW_inst_JTAGBUSY_UNCONNECTED;
@@ -123,7 +87,7 @@ module xadc_wiz_0
 
   (* BOX_TYPE = "PRIMITIVE" *) 
   XADC #(
-    .INIT_40(16'h0000),
+    .INIT_40(16'h1000),
     .INIT_41(16'h21AF),
     .INIT_42(16'h0400),
     .INIT_43(16'h0000),
@@ -131,10 +95,10 @@ module xadc_wiz_0
     .INIT_45(16'h0000),
     .INIT_46(16'h0000),
     .INIT_47(16'h0000),
-    .INIT_48(16'h0800),
-    .INIT_49(16'hF0F1),
+    .INIT_48(16'h0000),
+    .INIT_49(16'h0070),
     .INIT_4A(16'h0000),
-    .INIT_4B(16'h0000),
+    .INIT_4B(16'h0070),
     .INIT_4C(16'h0000),
     .INIT_4D(16'h0000),
     .INIT_4E(16'h0000),
@@ -180,8 +144,8 @@ module xadc_wiz_0
         .MUXADDR(NLW_inst_MUXADDR_UNCONNECTED[4:0]),
         .OT(NLW_inst_OT_UNCONNECTED),
         .RESET(reset_in),
-        .VAUXN({vauxn15,vauxn14,vauxn13,vauxn12,1'b0,1'b0,1'b0,1'b0,vauxn7,vauxn6,vauxn5,vauxn4,1'b0,1'b0,1'b0,vauxn0}),
-        .VAUXP({vauxp15,vauxp14,vauxp13,vauxp12,1'b0,1'b0,1'b0,1'b0,vauxp7,vauxp6,vauxp5,vauxp4,1'b0,1'b0,1'b0,vauxp0}),
+        .VAUXN({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,vauxn6,vauxn5,vauxn4,1'b0,1'b0,1'b0,1'b0}),
+        .VAUXP({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,vauxp6,vauxp5,vauxp4,1'b0,1'b0,1'b0,1'b0}),
         .VN(vn_in),
         .VP(vp_in));
 endmodule

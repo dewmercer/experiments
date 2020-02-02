@@ -1,4 +1,4 @@
-`timescale 1ns / 1ps
+`timescale 1ns / 1ns
 //////////////////////////////////////////////////////////////////////////////////
 // Company: 
 // Engineer: 
@@ -22,7 +22,7 @@
 
 module SimMain;
      reg c = 1'b0;
-     wire [2:0] out;
+     wire [2:1] out;
        
      XADCdemo demo(
            .CLK100MHZ(c),
@@ -33,12 +33,14 @@ module SimMain;
            .ck_io(out)
         );
         
+     parameter CLOCK_PERIOD = 100;
+     
+     
      initial
      begin
         $monitor("c: %b", c);
      end
 
-     always 
-        #5 c = !c;
+        always #(CLOCK_PERIOD/2)  c <= ~c;
 
 endmodule

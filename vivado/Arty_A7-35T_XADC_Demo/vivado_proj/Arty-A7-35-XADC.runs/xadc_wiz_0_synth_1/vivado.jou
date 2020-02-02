@@ -2,8 +2,8 @@
 # Vivado v2019.2.1 (64-bit)
 # SW Build 2729669 on Thu Dec  5 04:48:12 MST 2019
 # IP Build 2729494 on Thu Dec  5 07:38:25 MST 2019
-# Start of session at: Fri Jan 24 16:59:32 2020
-# Process ID: 18217
+# Start of session at: Sat Jan 25 13:48:18 2020
+# Process ID: 1825
 # Current directory: /home/dmercer/src/experiments/vivado/Arty_A7-35T_XADC_Demo/vivado_proj/Arty-A7-35-XADC.runs/xadc_wiz_0_synth_1
 # Command line: vivado -log xadc_wiz_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source xadc_wiz_0.tcl
 # Log file: /home/dmercer/src/experiments/vivado/Arty_A7-35T_XADC_Demo/vivado_proj/Arty-A7-35-XADC.runs/xadc_wiz_0_synth_1/xadc_wiz_0.vds

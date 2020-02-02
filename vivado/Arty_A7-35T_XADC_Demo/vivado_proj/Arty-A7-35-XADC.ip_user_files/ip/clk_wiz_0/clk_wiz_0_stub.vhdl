@@ -1,7 +1,7 @@
 -- Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2019.2.1 (lin64) Build 2729669 Thu Dec  5 04:48:12 MST 2019
--- Date        : Sat Jan 25 12:40:33 2020
+-- Date        : Sun Jan 26 10:20:25 2020
 -- Host        : home-debian-1 running 64-bit Debian GNU/Linux 10 (buster)
 -- Command     : write_vhdl -force -mode synth_stub
 --               /home/dmercer/src/experiments/vivado/Arty_A7-35T_XADC_Demo/vivado_proj/Arty-A7-35-XADC.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0_stub.vhdl

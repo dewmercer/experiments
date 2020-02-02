@@ -1,7 +1,7 @@
 -- Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2019.2.1 (lin64) Build 2729669 Thu Dec  5 04:48:12 MST 2019
--- Date        : Fri Jan 24 17:00:20 2020
+-- Date        : Sat Jan 25 13:49:07 2020
 -- Host        : home-debian-1 running 64-bit Debian GNU/Linux 10 (buster)
 -- Command     : write_vhdl -force -mode funcsim
 --               /home/dmercer/src/experiments/vivado/Arty_A7-35T_XADC_Demo/vivado_proj/Arty-A7-35-XADC.srcs/xadc_wiz_0/ip/xadc_wiz_0/xadc_wiz_0_sim_netlist.vhdl
@@ -22,24 +22,12 @@ entity xadc_wiz_0 is
     di_in : in STD_LOGIC_VECTOR ( 15 downto 0 );
     dwe_in : in STD_LOGIC;
     reset_in : in STD_LOGIC;
-    vauxp0 : in STD_LOGIC;
-    vauxn0 : in STD_LOGIC;
     vauxp4 : in STD_LOGIC;
     vauxn4 : in STD_LOGIC;
     vauxp5 : in STD_LOGIC;
     vauxn5 : in STD_LOGIC;
     vauxp6 : in STD_LOGIC;
     vauxn6 : in STD_LOGIC;
-    vauxp7 : in STD_LOGIC;
-    vauxn7 : in STD_LOGIC;
-    vauxp12 : in STD_LOGIC;
-    vauxn12 : in STD_LOGIC;
-    vauxp13 : in STD_LOGIC;
-    vauxn13 : in STD_LOGIC;
-    vauxp14 : in STD_LOGIC;
-    vauxn14 : in STD_LOGIC;
-    vauxp15 : in STD_LOGIC;
-    vauxn15 : in STD_LOGIC;
     busy_out : out STD_LOGIC;
     channel_out : out STD_LOGIC_VECTOR ( 4 downto 0 );
     do_out : out STD_LOGIC_VECTOR ( 15 downto 0 );
@@ -66,7 +54,7 @@ architecture STRUCTURE of xadc_wiz_0 is
 begin
 inst: unisim.vcomponents.XADC
     generic map(
-      INIT_40 => X"0000",
+      INIT_40 => X"1000",
       INIT_41 => X"21AF",
       INIT_42 => X"0400",
       INIT_43 => X"0000",
@@ -74,10 +62,10 @@ inst: unisim.vcomponents.XADC
       INIT_45 => X"0000",
       INIT_46 => X"0000",
       INIT_47 => X"0000",
-      INIT_48 => X"0800",
-      INIT_49 => X"F0F1",
+      INIT_48 => X"0000",
+      INIT_49 => X"0070",
       INIT_4A => X"0000",
-      INIT_4B => X"0000",
+      INIT_4B => X"0070",
       INIT_4C => X"0000",
       INIT_4D => X"0000",
       INIT_4E => X"0000",
@@ -125,28 +113,16 @@ inst: unisim.vcomponents.XADC
       MUXADDR(4 downto 0) => NLW_inst_MUXADDR_UNCONNECTED(4 downto 0),
       OT => NLW_inst_OT_UNCONNECTED,
       RESET => reset_in,
-      VAUXN(15) => vauxn15,
-      VAUXN(14) => vauxn14,
-      VAUXN(13) => vauxn13,
-      VAUXN(12) => vauxn12,
-      VAUXN(11 downto 8) => B"0000",
-      VAUXN(7) => vauxn7,
+      VAUXN(15 downto 7) => B"000000000",
       VAUXN(6) => vauxn6,
       VAUXN(5) => vauxn5,
       VAUXN(4) => vauxn4,
-      VAUXN(3 downto 1) => B"000",
-      VAUXN(0) => vauxn0,
-      VAUXP(15) => vauxp15,
-      VAUXP(14) => vauxp14,
-      VAUXP(13) => vauxp13,
-      VAUXP(12) => vauxp12,
-      VAUXP(11 downto 8) => B"0000",
-      VAUXP(7) => vauxp7,
+      VAUXN(3 downto 0) => B"0000",
+      VAUXP(15 downto 7) => B"000000000",
       VAUXP(6) => vauxp6,
       VAUXP(5) => vauxp5,
       VAUXP(4) => vauxp4,
-      VAUXP(3 downto 1) => B"000",
-      VAUXP(0) => vauxp0,
+      VAUXP(3 downto 0) => B"0000",
       VN => vn_in,
       VP => vp_in
     );

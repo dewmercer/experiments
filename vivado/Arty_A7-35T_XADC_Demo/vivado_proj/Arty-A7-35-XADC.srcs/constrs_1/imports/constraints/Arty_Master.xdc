@@ -39,11 +39,10 @@ create_clock -period 10.000 -name sys_clk_pin -waveform {0.000 5.000} -add [get_
 
 ##Buttons
 
-#set_property -dict { PACKAGE_PIN D9    IOSTANDARD LVCMOS33 } [get_ports { btn[0] }]; #IO_L6N_T0_VREF_16 Sch=btn[0]
+set_property -dict { PACKAGE_PIN D9    IOSTANDARD LVCMOS33 } [get_ports { btn[0] }]; #IO_L6N_T0_VREF_16 Sch=btn[0]
 #set_property -dict { PACKAGE_PIN C9    IOSTANDARD LVCMOS33 } [get_ports { btn[1] }]; #IO_L11P_T1_SRCC_16 Sch=btn[1]
 #set_property -dict { PACKAGE_PIN B9    IOSTANDARD LVCMOS33 } [get_ports { btn[2] }]; #IO_L11N_T1_SRCC_16 Sch=btn[2]
 #set_property -dict { PACKAGE_PIN B8    IOSTANDARD LVCMOS33 } [get_ports { btn[3] }]; #IO_L12P_T1_MRCC_16 Sch=btn[3]
-
 
 ##Pmod Headers
 
@@ -114,16 +113,16 @@ set_property -dict {PACKAGE_PIN A5 IOSTANDARD LVCMOS33} [get_ports {ck_an_n[1]}]
 set_property -dict {PACKAGE_PIN A6 IOSTANDARD LVCMOS33} [get_ports {ck_an_p[1]}]
 set_property -dict {PACKAGE_PIN B4 IOSTANDARD LVCMOS33} [get_ports {ck_an_n[2]}]
 set_property -dict {PACKAGE_PIN C4 IOSTANDARD LVCMOS33} [get_ports {ck_an_p[2]}]
-set_property -dict {PACKAGE_PIN A1 IOSTANDARD LVCMOS33} [get_ports {ck_an_n[3]}]
-set_property -dict {PACKAGE_PIN B1 IOSTANDARD LVCMOS33} [get_ports {ck_an_p[3]}]
-set_property -dict {PACKAGE_PIN B2 IOSTANDARD LVCMOS33} [get_ports {ck_an_n[4]}]
-set_property -dict {PACKAGE_PIN B3 IOSTANDARD LVCMOS33} [get_ports {ck_an_p[4]}]
-set_property -dict {PACKAGE_PIN C14 IOSTANDARD LVCMOS33} [get_ports {ck_an_n[5]}]
-set_property -dict {PACKAGE_PIN D14 IOSTANDARD LVCMOS33} [get_ports {ck_an_p[5]}]
+#set_property -dict {PACKAGE_PIN A1 IOSTANDARD LVCMOS33} [get_ports {ck_an_n[3]}]
+#set_property -dict {PACKAGE_PIN B1 IOSTANDARD LVCMOS33} [get_ports {ck_an_p[3]}]
+#set_property -dict {PACKAGE_PIN B2 IOSTANDARD LVCMOS33} [get_ports {ck_an_n[4]}]
+#set_property -dict {PACKAGE_PIN B3 IOSTANDARD LVCMOS33} [get_ports {ck_an_p[4]}]
+#set_property -dict {PACKAGE_PIN C14 IOSTANDARD LVCMOS33} [get_ports {ck_an_n[5]}]
+#set_property -dict {PACKAGE_PIN D14 IOSTANDARD LVCMOS33} [get_ports {ck_an_p[5]}]
 
 ##ChipKit Digital I/O Low
 
-set_property -dict {PACKAGE_PIN V15 IOSTANDARD LVCMOS33} [get_ports {ck_io[0]}]
+#set_property -dict {PACKAGE_PIN V15 IOSTANDARD LVCMOS33} [get_ports {ck_io[0]}]
 set_property -dict {PACKAGE_PIN U16 IOSTANDARD LVCMOS33} [get_ports {ck_io[1]}]
 set_property -dict {PACKAGE_PIN P14 IOSTANDARD LVCMOS33} [get_ports {ck_io[2]}]
 #set_property -dict { PACKAGE_PIN T11   IOSTANDARD LVCMOS33 } [get_ports { ck_io[3] }]; #IO_L19P_T3_A10_D26_14 Sch=ck_io[3]
@@ -151,12 +150,12 @@ set_property -dict {PACKAGE_PIN P14 IOSTANDARD LVCMOS33} [get_ports {ck_io[2]}]
 #ChipKit Digital I/O On Inner Analog Header
 #Note: These pins will need to be connected to the XADC core when used as differential analog inputs (Chipkit analog pins A6-A11)
 
-set_property -dict {PACKAGE_PIN B7 IOSTANDARD LVCMOS33} [get_ports {ck_an_p[6]}]
-set_property -dict {PACKAGE_PIN B6 IOSTANDARD LVCMOS33} [get_ports {ck_an_n[6]}]
-set_property -dict {PACKAGE_PIN E6 IOSTANDARD LVCMOS33} [get_ports {ck_an_p[7]}]
-set_property -dict {PACKAGE_PIN E5 IOSTANDARD LVCMOS33} [get_ports {ck_an_n[7]}]
-set_property -dict {PACKAGE_PIN A4 IOSTANDARD LVCMOS33} [get_ports {ck_an_p[8]}]
-set_property -dict {PACKAGE_PIN A3 IOSTANDARD LVCMOS33} [get_ports {ck_an_n[8]}]
+#set_property -dict {PACKAGE_PIN B7 IOSTANDARD LVCMOS33} [get_ports {ck_an_p[6]}]
+#set_property -dict {PACKAGE_PIN B6 IOSTANDARD LVCMOS33} [get_ports {ck_an_n[6]}]
+#set_property -dict {PACKAGE_PIN E6 IOSTANDARD LVCMOS33} [get_ports {ck_an_p[7]}]
+#set_property -dict {PACKAGE_PIN E5 IOSTANDARD LVCMOS33} [get_ports {ck_an_n[7]}]
+#set_property -dict {PACKAGE_PIN A4 IOSTANDARD LVCMOS33} [get_ports {ck_an_p[8]}]
+#set_property -dict {PACKAGE_PIN A3 IOSTANDARD LVCMOS33} [get_ports {ck_an_n[8]}]
 
 
 ##ChipKit Digital I/O High
@@ -181,7 +180,7 @@ set_property -dict {PACKAGE_PIN A3 IOSTANDARD LVCMOS33} [get_ports {ck_an_n[8]}]
 ##Misc. ChipKit signals
 
 #set_property -dict { PACKAGE_PIN M17   IOSTANDARD LVCMOS33 } [get_ports { ck_ioa }]; #IO_L10N_T1_D15_14 Sch=ck_ioa
-set_property -dict { PACKAGE_PIN C2    IOSTANDARD LVCMOS33 } [get_ports { ck_rst }]; #IO_L16P_T2_35 Sch=ck_rst
+set_property -dict {PACKAGE_PIN C2 IOSTANDARD LVCMOS33} [get_ports ck_rst]
 
 ## ChipKit SPI
 

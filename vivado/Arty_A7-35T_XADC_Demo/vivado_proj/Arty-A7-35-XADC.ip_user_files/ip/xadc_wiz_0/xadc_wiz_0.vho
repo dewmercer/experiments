@@ -64,24 +64,12 @@ COMPONENT xadc_wiz_0
     reset_in : IN STD_LOGIC;
     vp_in : IN STD_LOGIC;
     vn_in : IN STD_LOGIC;
-    vauxp0 : IN STD_LOGIC;
-    vauxn0 : IN STD_LOGIC;
     vauxp4 : IN STD_LOGIC;
     vauxn4 : IN STD_LOGIC;
     vauxp5 : IN STD_LOGIC;
     vauxn5 : IN STD_LOGIC;
     vauxp6 : IN STD_LOGIC;
     vauxn6 : IN STD_LOGIC;
-    vauxp7 : IN STD_LOGIC;
-    vauxn7 : IN STD_LOGIC;
-    vauxp12 : IN STD_LOGIC;
-    vauxn12 : IN STD_LOGIC;
-    vauxp13 : IN STD_LOGIC;
-    vauxn13 : IN STD_LOGIC;
-    vauxp14 : IN STD_LOGIC;
-    vauxn14 : IN STD_LOGIC;
-    vauxp15 : IN STD_LOGIC;
-    vauxn15 : IN STD_LOGIC;
     channel_out : OUT STD_LOGIC_VECTOR(4 DOWNTO 0);
     eoc_out : OUT STD_LOGIC;
     alarm_out : OUT STD_LOGIC;
@@ -107,24 +95,12 @@ your_instance_name : xadc_wiz_0
     reset_in => reset_in,
     vp_in => vp_in,
     vn_in => vn_in,
-    vauxp0 => vauxp0,
-    vauxn0 => vauxn0,
     vauxp4 => vauxp4,
     vauxn4 => vauxn4,
     vauxp5 => vauxp5,
     vauxn5 => vauxn5,
     vauxp6 => vauxp6,
     vauxn6 => vauxn6,
-    vauxp7 => vauxp7,
-    vauxn7 => vauxn7,
-    vauxp12 => vauxp12,
-    vauxn12 => vauxn12,
-    vauxp13 => vauxp13,
-    vauxn13 => vauxn13,
-    vauxp14 => vauxp14,
-    vauxn14 => vauxn14,
-    vauxp15 => vauxp15,
-    vauxn15 => vauxn15,
     channel_out => channel_out,
     eoc_out => eoc_out,
     alarm_out => alarm_out,

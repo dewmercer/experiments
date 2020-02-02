@@ -3,7 +3,7 @@
    <wave_state>
    </wave_state>
    <db_ref_list>
-      <db_ref path="SimMain_func_impl.wdb" id="1">
+      <db_ref path="SimMain_behav.wdb" id="1">
          <top_modules>
             <top_module name="SimMain" />
             <top_module name="glbl" />
@@ -11,29 +11,47 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="21261434530fs"></ZoomStartTime>
-      <ZoomEndTime time="24716434531fs"></ZoomEndTime>
-      <Cursor1Time time="24140601197fs"></Cursor1Time>
+      <ZoomStartTime time="31217549800fs"></ZoomStartTime>
+      <ZoomEndTime time="101517549801fs"></ZoomEndTime>
+      <Cursor1Time time="61117549800fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="186"></NameColumnWidth>
-      <ValueColumnWidth column_width="122"></ValueColumnWidth>
+      <ValueColumnWidth column_width="110"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="4" />
-   <wvobject type="logic" fp_name="/SimMain/demo/counter">
-      <obj_property name="ElementShortName">counter</obj_property>
-      <obj_property name="ObjectShortName">counter</obj_property>
+   <WVObjectSize size="7" />
+   <wvobject type="array" fp_name="/SimMain/demo/counter">
+      <obj_property name="ElementShortName">counter[11:0]</obj_property>
+      <obj_property name="ObjectShortName">counter[11:0]</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/SimMain/demo/counter_reg">
-      <obj_property name="ElementShortName">counter_reg[15:0]</obj_property>
-      <obj_property name="ObjectShortName">counter_reg[15:0]</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/SimMain/out[2]">
-      <obj_property name="ElementShortName">[2]</obj_property>
-      <obj_property name="ObjectShortName">[2]</obj_property>
+   <wvobject type="logic" fp_name="/SimMain/demo/divider">
+      <obj_property name="ElementShortName">divider</obj_property>
+      <obj_property name="ObjectShortName">divider</obj_property>
    </wvobject>
    <wvobject type="logic" fp_name="/SimMain/out[1]">
+      <obj_property name="DisplayName">label</obj_property>
       <obj_property name="ElementShortName">[1]</obj_property>
       <obj_property name="ObjectShortName">[1]</obj_property>
+      <obj_property name="label">ck_io[1]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/SimMain/out[2]">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">[2]</obj_property>
+      <obj_property name="ObjectShortName">[2]</obj_property>
+      <obj_property name="label">Modulated</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/SimMain/out[2]">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">[2]</obj_property>
+      <obj_property name="ObjectShortName">[2]</obj_property>
+      <obj_property name="label">ck_io[2]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/SimMain/demo/highDuration">
+      <obj_property name="ElementShortName">highDuration[11:0]</obj_property>
+      <obj_property name="ObjectShortName">highDuration[11:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/SimMain/demo/lowDuration">
+      <obj_property name="ElementShortName">lowDuration[11:0]</obj_property>
+      <obj_property name="ObjectShortName">lowDuration[11:0]</obj_property>
    </wvobject>
 </wave_config>

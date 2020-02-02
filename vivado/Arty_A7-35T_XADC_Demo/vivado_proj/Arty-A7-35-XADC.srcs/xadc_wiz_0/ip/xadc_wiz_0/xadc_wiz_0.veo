@@ -65,24 +65,12 @@ xadc_wiz_0 your_instance_name (
   .reset_in(reset_in),        // input wire reset_in
   .vp_in(vp_in),              // input wire vp_in
   .vn_in(vn_in),              // input wire vn_in
-  .vauxp0(vauxp0),            // input wire vauxp0
-  .vauxn0(vauxn0),            // input wire vauxn0
   .vauxp4(vauxp4),            // input wire vauxp4
   .vauxn4(vauxn4),            // input wire vauxn4
   .vauxp5(vauxp5),            // input wire vauxp5
   .vauxn5(vauxn5),            // input wire vauxn5
   .vauxp6(vauxp6),            // input wire vauxp6
   .vauxn6(vauxn6),            // input wire vauxn6
-  .vauxp7(vauxp7),            // input wire vauxp7
-  .vauxn7(vauxn7),            // input wire vauxn7
-  .vauxp12(vauxp12),          // input wire vauxp12
-  .vauxn12(vauxn12),          // input wire vauxn12
-  .vauxp13(vauxp13),          // input wire vauxp13
-  .vauxn13(vauxn13),          // input wire vauxn13
-  .vauxp14(vauxp14),          // input wire vauxp14
-  .vauxn14(vauxn14),          // input wire vauxn14
-  .vauxp15(vauxp15),          // input wire vauxp15
-  .vauxn15(vauxn15),          // input wire vauxn15
   .channel_out(channel_out),  // output wire [4 : 0] channel_out
   .eoc_out(eoc_out),          // output wire eoc_out
   .alarm_out(alarm_out),      // output wire alarm_out
